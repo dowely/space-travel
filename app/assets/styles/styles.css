@@ -1,0 +1,12 @@
+/*@import 'normalize.css'; //test if it's working*/
+
+@import 'base/_variables';
+
+.test {
+  color: red;
+
+  &__inner {
+    color: $testColor;
+    columns: 2;
+  }
+}

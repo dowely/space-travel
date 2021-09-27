@@ -1,0 +1,36 @@
+{
+  "name": "space-travel",
+  "version": "1.0.0",
+  "description": "Fictional website build as a front-end practice",
+  "main": "App.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dowely/space-travel.git"
+  },
+  "keywords": [
+    "space",
+    "travel"
+  ],
+  "author": "Marcin Ogar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dowely/space-travel/issues"
+  },
+  "homepage": "https://github.com/dowely/space-travel#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.3.6",
+    "css-loader": "^6.3.0",
+    "postcss-import": "^14.0.2",
+    "postcss-loader": "^6.1.1",
+    "postcss-nested": "^5.0.6",
+    "postcss-simple-vars": "^6.0.3",
+    "style-loader": "^3.3.0",
+    "webpack": "^5.54.0",
+    "webpack-cli": "^4.8.0",
+    "webpack-dev-server": "^4.3.0"
+  }
+}
