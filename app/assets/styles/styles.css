@@ -1,12 +1,6 @@
-/*@import 'normalize.css'; //test if it's working*/
-
+@import 'normalize.css';
 @import 'base/_variables';
-
-.test {
-  color: red;
-
-  &__inner {
-    color: $testColor;
-    columns: 2;
-  }
-}
+@import 'base/_global';
+@import 'base/_type';
+@import 'base/_wrapper';
+@import 'modules/_ultimate-trip';

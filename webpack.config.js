@@ -1,5 +1,7 @@
 const path = require('path')
 
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin')
+
 const postCSSPlugins = [
   require('postcss-import'),
   require('postcss-simple-vars'),
@@ -19,6 +21,14 @@ module.exports ={
       {
         test: /\.css$/i,
         use: ['style-loader',{loader: 'css-loader', options: {url: false}}, {loader: 'postcss-loader', options: {postcssOptions: {plugins: postCSSPlugins}}}]
+      },
+      {
+        test: /\.(woff|woff2|ttf)$/i,
+        type: 'asset/resource'
+      },
+      {
+        test: /\.svg$/i,
+        use: [{loader: 'svg-sprite-loader'}]
       }
     ]
   },
@@ -34,5 +44,7 @@ module.exports ={
     host: '0.0.0.0',
     open: 'http://localhost:3000'
   },
-  plugins: []
+  plugins: [
+    new SpriteLoaderPlugin()
+  ]
 }
