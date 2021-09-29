@@ -4,6 +4,7 @@ const SpriteLoaderPlugin = require('svg-sprite-loader/plugin')
 
 const postCSSPlugins = [
   require('postcss-import'),
+  require('postcss-mixins'),
   require('postcss-simple-vars'),
   require('postcss-nested'),
   require('autoprefixer')

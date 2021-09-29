@@ -1,0 +1,84 @@
+.site-header {
+
+  &__container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100px;
+  }
+
+  &__logo {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 16px;
+  }
+
+  &__logo__text {
+    font-family: "Orbitron", "sans-serif";
+    font-weight: 500;
+    font-size: 3rem;
+    line-height: .8;
+    margin: 0;
+  }
+
+  &__logo__top-arc {
+    width: 212px;
+    height: 212px;
+    border-radius: 9999px;
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform-origin: 50% 0;
+    transform: translateX(-50%) scaleY(.25);
+    background: linear-gradient(to right, $mainRed 10%, $lightBlue 90%);
+  }
+
+  &__logo__bottom-arc {
+    width: 212px;
+    height: 212px;
+    border-radius: 9999px;
+    position: absolute;
+    top: 88%;
+    left: 50%;
+    transform-origin: 50% 0;
+    transform: translateX(-50%) scaleY(.115);
+    background-color: #fff;
+  }
+
+  &__menu-icon {
+    width: 28px;
+    height: 28px;
+    position: absolute;
+    right: 0;
+    top: 24px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 4px;
+      top: 0;
+      left: 0;
+      background-color: $darkBlue;
+    }
+
+    &__middle {
+      width: 100%;
+      height: 4px;
+      position: absolute;
+      top: 12px;
+      left: 0;
+      background-color: $darkBlue;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 4px;
+      bottom: 0;
+      left: 0;
+      background-color: $darkBlue;
+    }
+  }
+}

@@ -42,6 +42,16 @@
   font-style: normal;
 } 
 
+@font-face {
+  font-family: "Orbitron";
+  src:
+    url("/assets/styles/fonts/orbitron-v19-latin-500.woff") format("woff"),
+    url("/assets/styles/fonts/orbitron-v19-latin-500.woff2") format("woff2")
+  ;
+  font-weight: 500;
+  font-style: normal;
+}
+
 * {
   box-sizing: border-box;
 }

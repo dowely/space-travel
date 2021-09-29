@@ -1,0 +1,19 @@
+.btn {
+  text-decoration: none;
+  display: inline-block;
+  background-image: linear-gradient(to right, $mainRed 0%, $lightBlue 50%, $darkBlue 100%);
+  background-size: 200%;
+  background-position: 0%;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 15px 25px;
+  border-radius: 9999px;
+  transition: background-position .3s ease-out;
+
+  @media(hover: hover) and (pointer: fine) {
+    &:hover {
+      background-position: 100%;
+    }
+  }
+}

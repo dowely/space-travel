@@ -5,6 +5,10 @@
     text-transform: uppercase;
     font-weight: 300;
     letter-spacing: 3px;
+
+    @mixin atLarge {
+      font-size: 1rem;
+    }
   }
 
   &__title {
@@ -13,10 +17,23 @@
     line-height: 1.2;
   }
 
+  &__title--hero {
+    font-size: 2.35rem;
+    font-weight: 700;
+    line-height: 1.2;
+
+    @mixin atLarge {
+      font-size: 3rem;
+    }
+  }
+
   &__subtitle {
     font-size: 1rem;
     font-weight: 600;
-    color: $mainGray;
     line-height: 2;
+
+    @mixin atLarge {
+      font-size: 1.15rem;
+    }
   }
 }

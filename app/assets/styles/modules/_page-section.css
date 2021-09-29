@@ -1,0 +1,8 @@
+.page-section {
+  position: relative;
+  padding: 4.375rem 0;
+
+  &--first {
+    padding-top: 0;
+  }
+}

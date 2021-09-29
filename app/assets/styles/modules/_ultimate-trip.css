@@ -2,14 +2,69 @@
 
   text-align: center;
 
+  @mixin atMedium {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+  }
+
+  @mixin atLarge {
+    align-items: flex-end;
+  }
+
+  &__circle {
+    height: 70px;
+    width: 70px;
+    border-radius: 9999px;
+    background-color: rgba($mainSilverRgba, .5);
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translateX(-50%);
+
+    @mixin atMedium {
+      display: none;
+    }
+
+    @mixin atLarge {
+      display: block;
+      height: 105px;
+      width: 105px;
+      top: 8px;
+    }
+  }
+
   &__ilustration-container {
     padding: 3.5rem 0;
     position: relative;
+    display: inline-block;
+
+    @mixin atMedium {
+      order: 2;
+      padding: 6rem 0;
+    }
+
+    @mixin atLarge {
+      padding: 6rem 0 0;
+    }
   }
 
   &__rocket {
     width: 225px;
     height: 206px;
+    position: relative;
+    z-index: 2;
+
+    @mixin atMedium {
+      width: 315px;
+      height: 288px;
+    }
+
+    @mixin atLarge {
+      width: 450px;
+      height: 412px;
+    }
   }
 
   &__star {
@@ -17,13 +72,60 @@
     height: 48px;
     position: absolute;
     top: 0;
-    right: 45px;
+    right: 8px;
+
+    @mixin atMedium {
+      top: 32px;
+      right: 48px;
+    }
+
+    @mixin atLarge {
+      width: 74px;
+      height: 74px;
+      top: 16px;
+      right: 32px;
+    }
   }
 
   &__diamond {
     width: 50px;
     height: 50px;
-    border: 3px solid $mainSilver;
+    border: 2px solid $mainSilver;
+    border-radius: 9px;
+    transform: skew(-30deg);
+    position: absolute;
+    left: 10px;
+    bottom: 78px;
+
+    @mixin atMedium {
+      border-width: 3px;
+      width: 70px;
+      height: 70px;
+      left: 14px;
+      bottom: 124px;
+    }
+
+    @mixin atLarge {
+      border-width: 4px;
+      width: 100px;
+      height: 100px;
+      left: 20px;
+      bottom: 36px;
+      border-radius: 18px;
+    }
+  }
+
+  &__text-content {
+
+    @mixin atSmall {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    @mixin atMedium {
+      max-width: 45%;
+      margin: 0;
+    }    
   }
 
   &__tagline {
@@ -33,6 +135,24 @@
   &__title {
     max-width: 7.75em;
     margin: .6em auto;
+
+    @mixin atMedium {
+      max-width: none;
+      margin: .6em 0;
+    }
+
+    @mixin atLarge {
+      margin: .5em 0 .4em;
+    }
+  }
+
+  &__subtitle {
+    color: $mainGray;
+    margin-bottom: 2.6rem;
+
+    @mixin atLarge {
+      max-width: 20em;
+    }
   }
 
 }
