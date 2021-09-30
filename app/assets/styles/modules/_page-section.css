@@ -1,6 +1,10 @@
 .page-section {
   position: relative;
-  padding: 4.375rem 0;
+  padding: 70px 0;
+
+  @mixin atLarge {
+    padding: 200px 0;
+  }
 
   &--first {
     padding-top: 0;

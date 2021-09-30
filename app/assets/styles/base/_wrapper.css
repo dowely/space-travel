@@ -9,4 +9,9 @@
   @mixin atLarge {
     padding: 0 72px;
   }
+
+  @mixin atXLarge {
+    max-width: 1040px;
+    padding: 0;
+  }
 }

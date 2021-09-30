@@ -33,6 +33,46 @@
       width: 105px;
       top: 8px;
     }
+
+    @mixin atXLarge {
+      height: 140px;
+      width: 140px;
+      top: 80px;
+    }
+  }
+
+  &__rectangle {
+    display: none;
+    width: 128px;
+    height: 54px;
+    border: 4px solid $mainSilver;
+    border-radius: 12px;
+    position: absolute;
+    bottom: 106px;
+    left: 50%;
+    transform: translateX(calc((1040px / 2) + 36px));
+
+    @mixin atXLarge {
+      display: block;
+    }
+  }
+
+  &__elipse {
+    display: none;
+    width: 450px;
+    height: 450px;
+    border: 24px solid $mainSilver;
+    border-radius: 9999px;
+    opacity: .5;
+    transform-origin: 50% 0;
+    transform: translateX(50%) scaleY(.6) skewY(-20deg);
+    position: absolute;
+    top: 80px;
+    right: 0;
+
+    @mixin atFullScreen {
+      display: block;
+    }
   }
 
   &__ilustration-container {
@@ -46,7 +86,11 @@
     }
 
     @mixin atLarge {
-      padding: 6rem 0 0;
+      padding: 7rem 0 0;
+    }
+
+    @mixin atXLarge {
+      padding-top: 12.5rem;
     }
   }
 
@@ -82,8 +126,13 @@
     @mixin atLarge {
       width: 74px;
       height: 74px;
-      top: 16px;
-      right: 32px;
+      top: 32px;
+      right: 40px;
+    }
+
+    @mixin atXLarge {
+      top: 118px;
+      right: 48px;
     }
   }
 
@@ -125,7 +174,11 @@
     @mixin atMedium {
       max-width: 45%;
       margin: 0;
-    }    
+    }
+
+    @mixin atXLarge {
+      max-width: 50%;
+    }
   }
 
   &__tagline {
@@ -143,6 +196,10 @@
 
     @mixin atLarge {
       margin: .5em 0 .4em;
+    }
+
+    @mixin atXLarge {
+      margin: .3em 0 .5em;
     }
   }
 

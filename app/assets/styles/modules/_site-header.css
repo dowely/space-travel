@@ -5,6 +5,7 @@
     display: flex;
     align-items: center;
     height: 100px;
+    justify-content: space-between;
   }
 
   &__logo {
@@ -52,6 +53,10 @@
     right: 0;
     top: 24px;
 
+    @mixin atLarge {
+      display: none;
+    }
+
     &::before {
       content: '';
       position: absolute;
@@ -80,5 +85,18 @@
       left: 0;
       background-color: $darkBlue;
     }
+  }
+
+  &__menu-content {
+    display: none;
+
+    @mixin atLarge {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__btn-container {
+    margin-left: 1rem;
   }
 }

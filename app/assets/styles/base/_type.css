@@ -25,6 +25,10 @@
     @mixin atLarge {
       font-size: 3rem;
     }
+
+    @mixin atXLarge {
+      font-size: 4rem;
+    }
   }
 
   &__subtitle {
@@ -34,6 +38,12 @@
 
     @mixin atLarge {
       font-size: 1.15rem;
+    }
+
+    @mixin atXLarge {
+      font-size: 1.35rem;
+      font-weight: 500;
+      line-height: 1.75;
     }
   }
 }

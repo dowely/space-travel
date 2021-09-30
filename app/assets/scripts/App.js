@@ -5,6 +5,7 @@ function importSprites(r) {
 }
 
 importSprites(require.context('../ilustrations', true, /\.svg$/))
+importSprites(require.context('../icons', true, /\.svg$/))
 
 if(module.hot) {
   module.hot.accept()

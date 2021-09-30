@@ -1,0 +1,15 @@
+.live-stream {
+
+  &__broadcast {
+    fill: blue;
+  }
+
+  &__photo {
+    width: 100%;
+    height: auto;
+  }
+
+  &__eye {
+    fill: blue;
+  }
+}

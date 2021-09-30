@@ -1,7 +1,7 @@
 .btn {
   text-decoration: none;
   display: inline-block;
-  background-image: linear-gradient(to right, $mainRed 0%, $lightBlue 50%, $darkBlue 100%);
+  background: linear-gradient(to right, $mainRed 0%, $lightBlue 50%, $darkBlue 100%);
   background-size: 200%;
   background-position: 0%;
   color: #fff;
@@ -10,10 +10,73 @@
   padding: 15px 25px;
   border-radius: 9999px;
   transition: background-position .3s ease-out;
+  cursor: pointer;
 
   @media(hover: hover) and (pointer: fine) {
     &:hover {
       background-position: 100%;
+    }
+  }
+
+  &--header {
+
+    width: 10rem;
+    height: 2.875rem;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+      linear-gradient(to right, $lightBlue 0%, $lightBlue 50%, #fff 50%, #fff 100%)
+    ;
+    background-size: 200%;
+    background-position: 100%;
+    border: 2px solid $lightBlue;
+    
+
+    @media(hover: hover) and (pointer: fine) {
+      &:hover {
+        background-position: 0%;
+
+        span {
+          color: #fff;
+        }
+
+        svg {
+          fill: #fff;
+        }
+      }
+    }
+
+    @mixin atXLarge {
+      width: 12.5rem;
+      height: 3.375rem;
+    }
+
+    span {
+      font-size: 1.25rem;
+      font-weight: 400;
+      display: inline-block;
+      margin-right: .75rem;
+      color: $lightBlue;
+      transition: color .3s ease-out;
+
+      @mixin atXLarge {
+        font-size: 1.5rem;
+      }
+    }
+
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      display: inline-block;
+      fill: $lightBlue;
+      transition: fill .3s ease-out;
+
+      @mixin atXLarge {
+        width: 2rem;
+        height: 2rem;
+      }
     }
   }
 }
