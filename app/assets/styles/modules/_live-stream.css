@@ -1,15 +1,131 @@
 .live-stream {
+  background-color: #fff;
+
+  &__top-line {
+    display: flex;
+    align-items: center;
+  }
 
   &__broadcast {
-    fill: blue;
+    fill: $darkBlue;
+  }
+
+  &__label {
+    font-family: 'Orbitron', 'sans-serif';
+    font-weight: 700;
   }
 
   &__photo {
     width: 100%;
     height: auto;
+    display: block;
+  }
+
+  &__bottom-section {
+    position: relative;
+    display: inline-block;
+  }
+
+  &__caption {
+    font-family: 'Orbitron', 'sans-serif';
+    vertical-align: text-top;
+  }
+
+  &__No-views {
+    font-family: 'Orbitron', 'sans-serif';
+    color: $mainGray;
+    display: block;
   }
 
   &__eye {
-    fill: blue;
+    fill: $darkBlue;
+    position: absolute;
+    top: 1px;
+    right: 0;
+  }
+
+  @mixin collageSmall {
+    width: 240px;
+    border-radius: 10px;
+    padding: 14px 12px 20px;
+
+    &__top-line {
+      margin-bottom: .875rem;
+    }
+
+    &__broadcast {
+      width: 1.15rem;
+      height: .9rem;
+    }
+
+    &__label {
+      font-size: .75rem;
+      margin-left: .5rem;
+    }
+
+    &__photo {
+      border-radius: 8px;
+    }
+
+    &__bottom-section {
+      padding-right: 2rem;
+      margin-top: .75rem;
+    }
+
+    &__caption {
+      font-size: .75rem;
+    }
+
+    &__No-views {
+      font-size: .75rem;
+    }
+
+    &__eye {
+      width: 1.2rem;
+      height: .75rem;
+    }
+  }
+
+  @mixin collageBig {
+    width: 400px;
+    padding: 24px 20px 32px;
+    border-radius: 18px;
+
+    &__top-line {
+      margin-bottom: 1.25rem;
+    }
+
+    &__broadcast {
+      width: 1.92rem;
+      height: 1.5rem;
+    }
+
+    &__label {
+      font-size: 1rem;
+      margin-left: .75rem;
+    }
+
+    &__photo {
+      border-radius: 16px;
+    }
+
+    &__bottom-section {
+      padding-right: 3rem;
+      margin-top: 1rem;
+    }
+
+    &__caption {
+      font-size: 1rem;
+    }
+
+    &__No-views {
+      font-size: 1rem;
+      margin-top: .5rem;
+    }
+
+    &__eye {
+      width: 2rem;
+      height: 1.25rem;
+    }
   }
 }

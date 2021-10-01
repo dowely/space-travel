@@ -7,9 +7,6 @@
     justify-content: space-between;
     align-items: center;
     text-align: left;
-  }
-
-  @mixin atLarge {
     align-items: flex-end;
   }
 
@@ -82,7 +79,7 @@
 
     @mixin atMedium {
       order: 2;
-      padding: 6rem 0;
+      padding: 6rem 0 1rem;
     }
 
     @mixin atLarge {
@@ -151,7 +148,7 @@
       width: 70px;
       height: 70px;
       left: 14px;
-      bottom: 124px;
+      bottom: 45px;
     }
 
     @mixin atLarge {
@@ -167,17 +164,13 @@
   &__text-content {
 
     @mixin atSmall {
-      max-width: 520px;
+      max-width: 450px;
       margin: 0 auto;
     }
 
     @mixin atMedium {
-      max-width: 45%;
+      max-width: 55%;
       margin: 0;
-    }
-
-    @mixin atXLarge {
-      max-width: 50%;
     }
   }
 
@@ -190,11 +183,12 @@
     margin: .6em auto;
 
     @mixin atMedium {
-      max-width: none;
+      max-width: 8em;
       margin: .6em 0;
     }
 
     @mixin atLarge {
+      max-width: none;
       margin: .5em 0 .4em;
     }
 

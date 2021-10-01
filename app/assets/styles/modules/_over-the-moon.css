@@ -1,0 +1,140 @@
+.over-the-moon {
+  background: linear-gradient($lightBlue, $darkBlue 95%);
+
+  @mixin atLarge {
+    background: linear-gradient(to right, $lightBlue, $darkBlue);
+  }
+  
+  &__container {
+    max-width: 350px;
+    margin: 0 auto;
+
+    @mixin atMedium {
+      max-width: 570px;
+    }
+
+    @mixin atLarge {
+      max-width: none;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    @mixin atXLarge {
+      align-items: flex-end;
+    }
+  }
+
+  &__collage {
+    position: relative;
+    padding-bottom: 94px;
+
+    @mixin atLarge {
+      width: 350px;
+      flex: none;
+      margin-right: 50px;
+    }
+
+    @mixin atXLarge {
+      width: 570px;
+      margin-right: 65px;
+      padding-bottom: 62px;
+    }
+  }
+
+  &__live-container {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__flight-container {
+    position: absolute;
+    top: 1.375rem;
+    right: 0;
+    z-index: 2;
+
+    @mixin atMedium {
+      top: 2.5rem;
+    }
+
+    @mixin atLarge {
+      top: 1.375rem;
+    }
+
+    @mixin atXLarge {
+      top: 2.5rem;
+    }
+  }
+
+  &__dots {
+    width: 136px;
+    height: 150px;
+    position: absolute;
+    bottom: 0;
+    left: 56px;
+    fill: rgba($mainSilverRgba, .7);
+
+    @mixin atMedium {
+      left: 236px;
+    }
+
+    @mixin atLarge {
+      left: 95px;
+    }
+
+    @mixin atXLarge {
+      left: -115px;
+      bottom: 115px;
+    }
+  }
+
+  &__pulsating-dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: rgba($mainSilverRgba, .7);
+    position: absolute;
+    top: -40px;
+    right: 32px;
+    animation: 3s pulse infinite linear alternate;
+
+    @mixin atMedium {
+      top: -24px;
+      right: 64px;
+    }
+
+    @mixin atLarge {
+      top: -40px;
+      right: 32px;
+    }
+
+    @mixin atXLarge {
+      top: -85px;
+      right: 205px;
+    }
+  }
+
+  &__text-content {
+    color: $mainSilver;
+  }
+
+  &__title {
+    color: #fff;
+    margin: 2.5rem 0 1.25rem;
+
+    @mixin atLarge {
+      margin-top: 0;
+      line-height: .75;
+    }
+  }
+}
+
+@keyframes pulse {
+  5% {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(2);
+    background-color: rgba($mainSilverRgba, 0.2);
+  }
+}

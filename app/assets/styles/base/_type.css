@@ -15,6 +15,18 @@
     font-size: 2.35rem;
     font-weight: 700;
     line-height: 1.2;
+
+    @mixin atMedium {
+      font-size: 2.5rem;
+    }
+
+    @mixin atLarge {
+      font-size: 2.65rem;
+    }
+
+    @mixin atXLarge {
+      font-size: 3rem;
+    }
   }
 
   &__title--hero {
@@ -33,17 +45,34 @@
 
   &__subtitle {
     font-size: 1rem;
-    font-weight: 600;
-    line-height: 2;
+    font-weight: 500;
+    line-height: 1.75;
 
-    @mixin atLarge {
+    @mixin atMedium {
       font-size: 1.15rem;
     }
 
     @mixin atXLarge {
       font-size: 1.35rem;
+    }
+  }
+
+  &__subtitle--hero {
+    font-weight: 600;
+    line-height: 2;
+
+    @mixin atXLarge {
       font-weight: 500;
       line-height: 1.75;
+    }
+  }
+
+  &__generic-text {
+    font-size: .875rem;
+    line-height: 1.7;
+
+    @mixin atXLarge {
+      font-size: 1rem;
     }
   }
 }

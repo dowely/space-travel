@@ -2,11 +2,23 @@
   position: relative;
   padding: 70px 0;
 
+  @mixin atMedium {
+    padding: 85px 0;
+  }
+
   @mixin atLarge {
-    padding: 200px 0;
+    padding: 100px 0;
+  }
+
+  @mixin atXLarge {
+    padding: 120px 0;
   }
 
   &--first {
     padding-top: 0;
+
+    @mixin atXLarge {
+      padding-bottom: 200px;
+    }
   }
 }

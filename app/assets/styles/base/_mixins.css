@@ -27,3 +27,15 @@
     @mixin-content;
   }
 }
+
+@define-mixin collageSmall {
+  @media (max-width: 768px), (min-width: 992px) and (max-width: 1260px) {
+    @mixin-content;
+  }
+}
+
+@define-mixin collageBig {
+  @media (min-width: 768px) and (max-width: 992px), (min-width: 1260px) {
+    @mixin-content;
+  }
+}
