@@ -1,0 +1,115 @@
+.mission-plan {
+
+  &__container {
+    
+    @mixin atLarge {
+      display: flex;
+      align-items: center;
+    }
+
+    @mixin atXLarge {
+      align-items: flex-end;
+    }
+  }
+
+  &__text-column {
+    text-align: center;
+
+    @mixin atSmall {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    @mixin atMedium {
+      max-width: 460px;
+    }
+
+    @mixin atLarge {
+      max-width: none;
+      margin-right: 65px;
+    }
+
+    @mixin atXLarge {
+      text-align: left;
+    }
+  }
+
+  &__circle {
+    width: 180px;
+    height: 180px;
+
+    @mixin atXLarge {
+      width: 154px;
+      height: 154px;
+    }
+  }
+
+  &__title {
+    @mixin atXLarge {
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__subtitle {
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+
+    @mixin atXLarge {
+      max-width: 410px;
+      line-height: 1.5;
+      margin-bottom: 1.15rem;
+    }
+  }
+
+  &__link {
+    color: $lightBlue;
+
+    @mixin atLarge {
+      font-size: 1.15rem;
+    }
+
+    @mixin atXLarge {
+      font-size: 1.25rem;
+    }
+  }
+
+  &__landing-img {
+    display: block;
+    margin: 3.25rem -24px 0;
+    max-width: calc(100% + 48px);
+
+    @mixin atSmall {
+      max-width: 400px;
+      margin: 3.25rem auto 0;
+    }
+
+    @mixin atLarge {
+      margin: 0;
+    }
+
+    @mixin atXLarge {
+      border-top-left-radius: 20px;
+    }
+  }
+
+  &__shuttle-img {
+    display: block;
+    margin-top: -35%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 28px;
+    filter: drop-shadow(0 0 3px rgba(0, 0, 0, .5));
+
+    @mixin atSmall {
+      max-width: 352px;
+      margin-top: -125px;
+    }
+
+    @mixin atXLarge {
+      max-width: none;
+      margin-top: -65px;
+      border-radius: 20px;
+      transform: translateX(-65px);
+    }
+  }
+}
