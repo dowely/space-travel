@@ -51,25 +51,12 @@
   }
 
   &__subtitle {
-    font-weight: 600;
     margin-bottom: 1.5rem;
 
     @mixin atXLarge {
       max-width: 410px;
       line-height: 1.5;
       margin-bottom: 1.15rem;
-    }
-  }
-
-  &__link {
-    color: $lightBlue;
-
-    @mixin atLarge {
-      font-size: 1.15rem;
-    }
-
-    @mixin atXLarge {
-      font-size: 1.25rem;
     }
   }
 

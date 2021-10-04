@@ -21,4 +21,8 @@
       padding-bottom: 200px;
     }
   }
+
+  &--florida {
+    padding-top: 0;
+  }
 }

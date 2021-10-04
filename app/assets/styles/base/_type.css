@@ -43,6 +43,10 @@
     }
   }
 
+  &__title--small {
+    font-size: 1.65rem;
+  }
+
   &__subtitle {
     font-size: 1rem;
     font-weight: 600;
@@ -74,6 +78,18 @@
 
     @mixin atXLarge {
       font-size: 1rem;
+    }
+  }
+
+  &__link {
+    color: $lightBlue;
+
+    @mixin atLarge {
+      font-size: 1.15rem;
+    }
+
+    @mixin atXLarge {
+      font-size: 1.25rem;
     }
   }
 }

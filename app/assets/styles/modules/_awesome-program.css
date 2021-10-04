@@ -1,0 +1,85 @@
+.awesome-program {
+  background-color: rgba($mainSilverRgba, .5);
+
+  &__container {
+    @mixin atSmall {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    @mixin atLarge {
+      flex-wrap: nowrap;
+      justify-content: space-between;
+    }
+  }
+
+  &__text-content {
+    text-align: center;
+    margin-bottom: 48px;
+    flex: 1 0 100%;
+
+    @mixin atLarge {
+      flex-basis: auto;
+      max-width: 30%;
+      text-align: start;
+      padding-right: 10px;
+      margin-bottom: 0;
+      align-self: center;
+    }
+
+    @mixin atXLarge {
+      max-width: 300px;
+      padding-right: 55px;
+    }
+  }
+
+  &__title {
+    margin: -10px 0 1.25rem;
+  }
+
+  &__subtitle {
+    color: $mainGray;
+    max-width: 16rem;
+    margin: 0 auto 2.5rem;
+
+    @mixin atSmall {
+      max-width: 18rem;
+    }
+
+    @mixin atLarge {
+      font-size: 1rem;
+      margin: 0 0 2.5rem;
+    }
+
+    @mixin atXLarge {
+      margin: 0 0 3rem;
+    }
+  }
+
+  &__card {
+    @mixin atSmall {
+      flex: 1;
+    }
+
+    @mixin atLarge {
+      max-width: 30%;
+    }
+
+    @mixin atXLarge {
+      max-width: 300px;
+    }
+  }
+
+  &__card--first {
+    margin-bottom: 125px;
+
+    @mixin atSmall {
+      margin-bottom: 0;
+      margin-right: 24px;
+    }
+
+    @mixin atLarge {
+      margin-right: 0;
+    }
+  }
+}

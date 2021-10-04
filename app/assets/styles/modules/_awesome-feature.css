@@ -1,0 +1,107 @@
+.awesome-feature {
+  border: 2px solid $lightBlue;
+  padding: 50px 32px;
+  position: relative;
+  height: 100%;
+  transition: border .3s ease-out;
+
+  @mixin atSmall {
+    text-align: center;
+  }
+
+  @mixin atXLarge {
+    padding: 50px 48px;
+    border-color: #fff;
+
+    &:hover {
+      border-color: $lightBlue;
+    }
+  }
+
+  &__circle {
+    background:
+      linear-gradient(to right, $mainRed, $lightBlue)
+    ;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    border-radius: 50%;
+    position: absolute;
+    right: 40px;
+
+    @mixin atSmall {
+      position: relative;
+      right: 0;
+      margin: 0 auto 32px;
+    }
+
+    @mixin atXLarge {
+
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 50%;
+        background-color: #fff;
+        transform: scale(1.01);
+        transition: opacity .3s ease-out;
+
+        .awesome-feature:hover & {
+          opacity: 0;
+        }
+      }
+    }
+  }
+
+  &__circle--bottom {
+    bottom: 0;
+    transform: translateY(50%);
+
+    @mixin atSmall {
+      transform: none;
+    }
+  }
+
+  &__circle--top {
+    top: 0;
+    transform: translateY(-50%);
+
+    @mixin atSmall {
+      transform: none;
+    }
+  }
+
+  &__icon {
+    fill: #fff;
+    width: 40px;
+    height: 40px;
+    margin: auto;
+
+    @mixin atXLarge {
+      fill: $darkBlue;
+      position: relative;
+      transition: fill .3s ease-out;
+
+      .awesome-feature:hover & {
+        fill: #fff;
+      }
+    }
+  }
+
+  &__title {
+    margin: 0 0 1rem;
+  }
+
+  &__subtitle {
+    color: $mainGray;
+    margin-bottom: 0;
+
+    @mixin atLarge {
+      font-size: 1rem;
+    }
+  }
+}
