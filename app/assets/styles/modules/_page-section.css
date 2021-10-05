@@ -24,5 +24,9 @@
 
   &--florida {
     padding-top: 0;
+
+    @mixin atLarge {
+      padding-bottom: 0;
+    }
   }
 }

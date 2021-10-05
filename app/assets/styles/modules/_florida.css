@@ -1,19 +1,54 @@
 .florida {
   position: relative;
 
+  .wrapper {
+    @mixin atSmall {
+      background:
+        linear-gradient(to bottom, transparent, transparent 650px, rgba($mainSilverRgba, .75) 650px, #fff)
+      ;
+    }
+
+    @mixin atLarge {
+      background: none;
+    }
+  }
+
+  &__container {
+    @mixin atLarge {
+      display: flex;
+      align-items: flex-end;
+    }
+  }
+
   &__video-column {
     margin: 0 -24px;
+    position: relative;
+
+    @mixin atSmall {
+      width: 520px;
+      margin: 0 auto;
+    }
+
+    @mixin atLarge {
+      flex: 0 1 520px;
+      margin: 0;
+    }
   }
 
   &__image {
     position: relative;
-    z-index: -2;
+    z-index: -1;
+    display: block;
   }
 
   &__overlay-text {
     position: absolute;
     top: 0;
     right: 24px;
+
+    @mixin atSmall {
+      right: 48px;
+    }
   }
 
   &__overlay-title {
@@ -21,6 +56,11 @@
     font-weight: 700;
     color: #fff;
     margin: 1.5rem 0 .5rem;
+
+    @mixin atSmall {
+      font-size: 1.5rem;
+      margin: 3rem 0 .625rem;
+    }
   }
 
   &__overlay-subtitle {
@@ -30,6 +70,10 @@
     text-transform: uppercase;
     text-align: end;
     color: #fff;
+
+    @mixin atSmall {
+      font-size: 1rem;
+    }
   }
 
   &__play-btn {
@@ -41,7 +85,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background-color: #fff;
+      background-color: rgba(255, 255, 255, .25);
       z-index: -1;
       animation: sonar 2s ease-out infinite;
     }
@@ -52,6 +96,22 @@
     position: absolute;
     top: 6rem;
     right: 32px;
+    cursor: pointer;
+
+    @mixin atSmall {
+      width: 90px;
+      height: 60px;
+      right: 60px;
+      top: 9rem;
+    }
+
+    @mixin atLarge {
+      right: -45px;
+    }
+
+    @mixin atXLarge {
+      top: 10rem;
+    }
 
     &::after {
       content: '';
@@ -65,16 +125,67 @@
       top: 50%;
       left: 50%;
       transform: translate(-40%, -50%);
+
+      @mixin atSmall {
+        border-width: 10px 0 10px 20px;
+      }
     }
   }
 
   &__main-content {
     max-width: 295px;
+
+    @mixin atSmall {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    @mixin atLarge {
+      max-width: none;
+      margin: 0 0 5.25rem 3.75rem;
+      flex: none;
+    }
+
+    @mixin atXLarge {
+      margin-left: 5.25rem;
+    }
   }
 
   &__title {
     margin-top: 2.5rem;
     margin-bottom: .5rem;
+
+    @mixin atSmall {
+      max-width: 18.5rem;
+    }
+
+    @mixin atMedium {
+      max-width: 20rem;
+    }
+
+    @mixin atLarge {
+      max-width: 21rem;
+    }
+
+    @mixin atXLarge {
+      max-width: 24rem;
+    }
+  }
+
+  &__subtitle {
+
+    @mixin atSmall {
+      max-width: 18rem;
+    }
+
+    @mixin atMedium {
+      max-width: 19.5rem;
+    }
+
+    @mixin atXLarge {
+      max-width: 23rem;
+      line-height: 1.5;
+    }
   }
 
   &__ring {
@@ -86,6 +197,16 @@
     right: 0;
     bottom: 12.5rem;
     transform: translateX(50%);
+
+    @mixin atSmall {
+      width: 120px;
+      height: 120px;
+      border-width: 20px;
+    }
+
+    @mixin atXLarge {
+      bottom: 17rem;
+    }
   }
 
   &__circle {
@@ -96,12 +217,29 @@
     position: absolute;
     right: 24px;
     bottom: 32px;
+
+    @mixin atSmall {
+      width: 150px;
+      height: 150px;
+      right: 20%;
+    }
+
+    @mixin atLarge {
+      top: 50px;
+      right: 70px;
+      z-index: -1;
+    }
+
+    @mixin atXLarge {
+      top: 70px;
+      right: 8%;
+    }
   }
 }
 
 @keyframes sonar {
   to {
-    background-color: rgba(255, 255, 255, .75);
+    background-color: rgba(255, 255, 255, 1);
     transform: scaleX(1.246) scaleY(1.355);
   }
 }
