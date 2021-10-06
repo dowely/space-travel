@@ -1,0 +1,175 @@
+.astronaut {
+  background-color: rgba($mainSilverRgba, .5);
+
+  &__container {
+    @mixin atSmall {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 48px;
+    }
+
+    @mixin atLarge {
+      justify-items: start;
+      grid-template-columns: 250px 250px 1fr;
+      grid-auto-flow: dense;
+      column-gap: 24px;
+    }
+  }
+
+  &__ilustration{
+    svg {
+      height: 200px;
+      width: 100%;
+      display: block;
+
+      @mixin atSmall {
+        height: 315px;
+      }
+
+      @mixin atLarge {
+        height: 100%;
+        max-height: 425px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+    }
+
+    @mixin atSmall {
+      grid-column: span 2;
+    }
+
+    @mixin atLarge {
+      grid-column: 3 / 5;
+      justify-self: stretch;
+      align-self: end;
+      border: 1px solid red;
+      position: relative;
+      padding: 50%;
+      margin-bottom: 5px;
+    }
+  }
+
+  &__text-content {
+    text-align: center;
+
+    @mixin atSmall {
+      grid-column: span 2;
+      max-width: 32rem;
+      margin: 0 auto;
+    }
+
+    @mixin atMedium {
+      max-width: 36rem;
+    }
+
+    @mixin atLarge {
+      text-align: start;
+      max-width: 30rem;
+      margin: 0;
+      align-self: end;
+    }
+  }
+
+  &__tagline {
+    margin-top: 2rem;
+
+    @mixin atSmall {
+      margin-top: 3rem;
+    }
+  }
+
+  &__title {
+    margin-top: 1.75rem;
+    margin-bottom: 2.5rem;
+  }
+
+  &__subtitle {
+    color: $mainGray;
+    padding: 0 1.25rem 2rem;
+
+    @mixin atLarge {
+      font-size: 1rem;
+      padding: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  &__feature-box {
+    max-width: 15rem;
+    margin: 0 auto;
+    position: relative;
+    overflow: auto;
+
+    @mixin atSmall {
+      margin: 0;
+    }
+
+    @mixin atMedium {
+      max-width: 17rem;
+    }
+
+    @mixin atLarge {
+      max-width: 15rem;
+    }
+  }
+
+  &__feature-box--pull-right {
+    text-align: right;
+    margin-bottom: 2rem;
+
+    @mixin atSmall {
+      justify-self: end;
+      margin-bottom: 0;
+    }
+
+    @mixin atLarge {
+      justify-self: start;
+      text-align: left;
+    }
+  }
+
+  &__icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(to right, $mainRed, $lightBlue);
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    svg {
+      height: 32px;
+      width: 100%;
+      margin: auto;
+      fill: #fff;
+    }
+
+    @mixin atLarge {
+      position: static;
+    }
+  }
+
+  &__icon--larger {
+    svg {
+      height: 36px;
+    }
+  }
+
+  &__icon--pull-left {
+    left: 0;
+  }
+
+  &__feature-title {
+    margin: 1.5rem 0 1rem;
+  }
+
+  &__feature-text {
+    color: $mainGray;
+
+    @mixin atLarge {
+      font-size: 1rem;
+    }
+  }
+}
