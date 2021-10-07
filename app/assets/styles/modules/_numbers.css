@@ -1,0 +1,97 @@
+.numbers {
+  background: linear-gradient($lightBlue, $darkBlue);
+  color: $mainSilver;
+  text-align: center;
+
+  @mixin atLarge {
+    background: linear-gradient(to left, $lightBlue, $darkBlue);
+  }
+
+  &__container {
+
+    @mixin atSmall {
+      padding: 0 20%;
+    }
+
+    @mixin atMedium {
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @mixin atLarge {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  &__item {
+    padding-bottom: 3.75rem;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+
+    @mixin atSmall {
+      display: inline-block;
+      
+      &:nth-child(even) {
+        float: right;
+        clear: left;
+      }
+
+      &:nth-child(odd) {
+        float: left;
+        clear: right;
+      }
+    }
+
+    @mixin atMedium {
+      display: block;
+
+      &:nth-child(even) {
+        float: none;
+      }
+
+      &:nth-child(odd) {
+        float: none;
+      }
+
+      &:nth-last-child(2) {
+        padding-bottom: 0;
+      }
+    }
+
+    @mixin atLarge {
+      padding-bottom: 0;
+    }
+
+  }
+
+  &__number {
+    font-size: 4rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  hr {
+    width: 60px;
+    height: 2px;
+    border: none;
+    background-color: $mainSilver;
+    margin: 20px auto 35px;
+  }
+
+  &__description {
+    font-size: 1.5rem;
+    margin: 0;
+
+    @mixin atLarge {
+      max-width: 8rem;
+      margin: 0 auto;
+    }
+
+    @mixin atXLarge {
+      max-width: none;
+    }
+  }
+}
