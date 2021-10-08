@@ -81,4 +81,17 @@
       }
     }
   }
+
+  &--newsletter {
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+
+    @mixin atXLarge {
+      width: 10rem;
+      padding: 0;
+      height: 3.75rem;
+      float: right;
+    }
+  }
 }

@@ -1,0 +1,44 @@
+.orbit {
+  width: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+
+  &__background-img {
+    width: 100%;
+    display: block;
+  }
+
+  &__color-layer {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient($mainRed, $lightBlue);
+    opacity: .5;
+  }
+
+  &__inner-circle {
+    width: 75%;
+    height: 75%;
+    border-radius: 50%;
+    background-color: #fff;
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__notch {
+    width: 30%;
+    height: 30%;
+    border-radius: 7%;
+    background-color: #fff;
+    position: absolute;
+    bottom: 50%;
+    right: 50%;
+    transform-origin: 100% 100%;
+    transform: rotate(45deg);
+  }
+}

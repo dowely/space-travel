@@ -29,4 +29,14 @@
       padding-bottom: 0;
     }
   }
+
+  &--numbers {
+    @mixin atMedium {
+      padding: 85px 0;
+    }
+  }
+
+  &--newsletter {
+    padding-bottom: 0;
+  }
 }
