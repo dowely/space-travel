@@ -30,6 +30,10 @@ module.exports ={
       {
         test: /\.svg$/i,
         use: [{loader: 'svg-sprite-loader'}]
+      },
+      {
+        test: /\.hbs$/i,
+        use: [{loader: 'handlebars-loader'}]
       }
     ]
   },
