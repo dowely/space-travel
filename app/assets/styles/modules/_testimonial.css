@@ -1,0 +1,118 @@
+.testimonial {
+  text-align: center;
+
+  @mixin atMedium {
+    cursor: pointer;
+  }
+
+  &__intro {
+    position: relative;
+    display: inline-block;
+
+    @mixin atMedium {
+      width: 18.75rem;
+    }
+  }
+
+  &__img {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    transition: filter .5s ease-out;
+
+    @mixin atMedium {
+      .testimonial:not(.active) & {
+        filter: grayscale();
+      }
+
+      .testimonial.active & {
+        outline: 1px solid $mainRed;
+        outline-offset: 2px;
+      }
+    }
+
+    @media(hover: hover) and (pointer: fine) {
+      .testimonial:hover & {
+        filter: none;;
+      }
+    }
+  }
+
+  &__intro-text {
+    padding: 1rem 0 1rem 7.5rem;
+    text-align: left;
+  }
+
+  &__name {
+    font-size: 1.5rem;
+    margin: 0 0 .875rem;
+  }
+
+  &__mission {
+    font-size: 1rem;
+    font-weight: 600;
+    color: $mainGray;
+    margin: 0 0 .375rem;
+  }
+
+  &__time {
+    font-size: 1rem;
+    font-weight: 600;
+    color: $mainGray;
+    margin: 0;
+  }
+
+  &__story {
+    @mixin atMedium {
+      max-width: 50%;
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba($lightBlueRgba, .1);
+
+      .testimonial.active & {
+        display: block;
+      }
+    }
+
+    @mixin atXLarge {
+      max-width: 30%;
+      background-color: transparent;
+    }
+  }
+
+  &__title {
+    margin: 4rem 0 1.75rem;
+    font-size: 1.75rem;
+    font-weight: 700;
+
+    @mixin atMedium {
+      margin-top: 1.25rem;
+    }
+
+    @mixin atXLarge {
+      font-size: 2rem;
+    }
+  }
+
+  &__text {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 600;
+    padding: 0 1.5rem;
+
+    @mixin atMedium {
+      margin-bottom: 1.5rem;
+      padding: 0 2rem;
+    }
+
+    @mixin atXLarge {
+      padding: 0 1.5rem;
+      line-height: 1.75;
+    }
+  }
+}

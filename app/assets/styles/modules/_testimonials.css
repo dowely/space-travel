@@ -1,0 +1,176 @@
+.testimonials {
+
+  &__heading {
+    position: relative;
+  }
+
+  &__title {
+    margin: 0 0 4.375rem;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  &__rect {
+    width: 62px;
+    height: 62px;
+    background-color: rgba($mainSilverRgba, .6);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-5.25rem);
+    top: -1rem;
+
+    @mixin atMedium {
+      width: 100px;
+      height: 100px;
+      top: -2rem;
+    }
+
+    @mixin atXLarge {
+      top: -2.5rem;
+      transform: translateX(-15.25rem);
+    }
+  }
+
+  &__list {
+    position: relative;
+
+    @mixin atLarge {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    @mixin atXLarge {
+      max-width: none;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li:not(.active) {
+      display: none;
+    }
+
+    @mixin atMedium {
+      ul {
+        position: relative;
+        display: grid;
+        grid-column-gap: 2rem;
+        grid-row-gap: 4rem;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+          "George Anna"
+          "Michelle ."
+          "Danny ."
+          "Hank Rachel"
+        ;
+      }
+
+      li.testimonial {
+        display: list-item;
+      }
+
+      li:nth-child(1) {
+        grid-area: George;
+      }
+      li:nth-child(2) {
+        grid-area: Anna;
+      }
+      li:nth-child(3) {
+        grid-area: Michelle;
+      }
+      li:nth-child(4) {
+        grid-area: Danny;
+      }
+      li:nth-child(5) {
+        grid-area: Hank;
+      }
+      li:nth-child(6) {
+        grid-area: Rachel;
+      }
+    }
+
+    @mixin atXLarge {
+      ul {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas:
+          "George Anna ."
+          "Michelle Danny ."
+         "Hank Rachel ."
+        ;
+      }
+    }
+
+  }
+
+  &__quote {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-10rem);
+    top: 5.375rem;
+    z-index: -1;
+
+    @mixin atMedium {
+      left: auto;
+      right: 0;
+      top: 50%;
+      transform: translate(-2rem, 3rem);
+    }
+
+    @mixin atXLarge {
+      transform: translate(0, 8.5rem);
+    }
+
+    svg {
+      height: 58px;
+      width: 72px;
+      fill: rgba($mainSilverRgba, .6);
+
+      @mixin atMedium {
+        height: 80px;
+        width: 95px;
+        fill: rgba($mainSilverRgba, 1);
+      }
+    }
+  }
+
+  &__slider {
+    width: 75px;
+    height: 25px;
+    border: 2px solid $lightBlue;
+    border-radius: 9999px;
+    margin: 2rem auto 0;
+    position: relative;
+
+    @mixin atMedium {
+      display: none;
+    }
+
+    &::before {
+      content: '';
+      display: block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: $lightBlue;
+      margin: 0 5px;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      animation: slider 2s infinite linear;
+    }
+  }
+}
+
+@keyframes slider {
+  60% {
+    right: 0;
+  }
+  80% {
+    right: calc(100% - 22px);
+  }
+}
