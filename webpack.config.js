@@ -33,7 +33,7 @@ module.exports ={
       },
       {
         test: /\.hbs$/i,
-        use: [{loader: 'handlebars-loader'}]
+        use: [{loader: 'handlebars-loader', options: {rootRelative: './helpers/'}}]
       }
     ]
   },

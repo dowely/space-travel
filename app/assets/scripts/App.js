@@ -1,5 +1,5 @@
 import '../styles/styles.css'
-import myTemplate from './testimonials.hbs'
+import myTemplate from './templates/testimonials.hbs'
 
 function importSprites(r) {
   r.keys().forEach(r)
