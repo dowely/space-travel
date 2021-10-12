@@ -44,6 +44,10 @@
     transform-origin: 50% 0;
     transform: translateX(-50%) scaleY(.115);
     background-color: #fff;
+
+    &--silver {
+      background-color: $mainSilver;
+    }
   }
 
   &__menu-icon {

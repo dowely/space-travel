@@ -39,4 +39,18 @@
   &--newsletter {
     padding-bottom: 0;
   }
+
+  &--line-through {
+    padding-bottom: 0;
+
+    @mixin atXLarge {
+      padding-top: 0;
+    }
+  }
+
+  &--footer {
+    @mixin atLarge {
+      padding: 90px 0;
+    }
+  }
 }

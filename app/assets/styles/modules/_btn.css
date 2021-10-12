@@ -94,4 +94,18 @@
       float: right;
     }
   }
+
+  &--line-through {
+    background: transparent;
+    font-weight: 500;
+    border: 2px solid #fff;
+    padding: 12px 0;
+    transition: background-color .3s ease-out;
+
+    @media(hover: hover) and (pointer: fine) {
+      &:hover {
+        background: $mainRed;
+      }
+    }
+  }
 }

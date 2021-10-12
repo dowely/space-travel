@@ -1,0 +1,124 @@
+.line-through {
+  background: linear-gradient($darkBlue, $lightBlue);
+
+  @mixin atXLarge {
+    background: linear-gradient(#fff, #fff 50%, $mainSilver 50%, $mainSilver);
+  }
+
+  &__container {
+    position: relative;
+    padding-bottom: 6.5rem;
+
+    @mixin atMedium {
+      padding-bottom: 3.5rem;
+    }
+
+    @mixin atXLarge {
+      padding: 60px 0;
+      background: linear-gradient($darkBlue, $lightBlue);
+      border-radius: 28px;
+    }
+  }
+
+  &__inner {
+    color: #fff;
+    text-align: center;
+  }
+
+  &__slogan {
+    font-size: 3rem;
+    font-weight: 600;
+    line-height: 1.2;
+    margin: -1rem auto 2.25rem;
+    max-width: 18rem;
+
+    @mixin atMedium {
+      max-width: none;
+    }
+
+    @mixin atXLarge {
+      font-size: 3.5rem;
+      margin-bottom: 1.75rem;
+    }
+  }
+
+  &__subtitle {
+    font-weight: 400;
+    margin-bottom: 2rem;
+
+    @mixin atSmall {
+      max-width: 32rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @mixin atMedium {
+      font-size: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    @mixin atLarge {
+      font-size: 1.15rem;
+      max-width: 36rem;
+    }
+
+    @mixin atXLarge {
+      font-size: 1.35rem;
+      max-width: 42rem;
+      font-weight: 300;
+    }
+  }
+
+  &__dots-5x4 {
+    position: absolute;
+    left: -3rem;
+    bottom: -2.375rem;
+
+    @mixin atMedium {
+      bottom: 8px;
+      left: -24px
+    }
+
+    @mixin atLarge {
+      left: -48px;
+    }
+
+    @mixin atXLarge {
+      left: 24px;
+    }
+
+    svg {
+      width: 135px;
+      height: 115px;
+      fill: $mainSilver;
+      opacity: .25;
+    }
+  }
+
+  &__dots-4x3 {
+    position: absolute;
+    right: -3rem;
+    top: 5rem;
+
+    @mixin atMedium {
+      right: -2rem;
+      top: 6rem;
+    }
+
+    @mixin atLarge {
+      right: -3rem;
+    }
+
+    @mixin atXLarge {
+      right: 1rem;
+      top: 9rem;
+    }
+
+    svg {
+      width: 104px;
+      height: 80px;
+      fill: $mainSilver;
+      opacity: .25;
+    }
+  }
+}
