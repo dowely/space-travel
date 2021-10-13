@@ -1,5 +1,6 @@
 import '../styles/styles.css'
 import myTemplate from './templates/testimonials.hbs'
+import MobileMenu from './modules/MobileMenu'
 
 function importSprites(r) {
   r.keys().forEach(r)
@@ -24,3 +25,5 @@ function createTestimonialsHTML(testimonials) {
   let ul = document.querySelector(".testimonials__list ul")
   ul.innerHTML = myTemplate(testimonials)
 }
+
+let mobileMenu = new MobileMenu()
