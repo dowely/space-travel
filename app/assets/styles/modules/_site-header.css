@@ -1,4 +1,21 @@
 .site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(-100%);
+  transition: all .3s linear;
+  background-color: #fff;
+  border-bottom: 1px solid $mainSilver;
+  z-index: 5;
+
+  &--is-visible {
+    transform: translateY(0);
+  }
+
+  &--is-docked {
+    border-bottom-color: transparent;
+  }
 
   &__container {
     position: relative;
@@ -95,7 +112,7 @@
   &__menu-content {
     display: none;
 
-    &--is-visible {
+    &--is-expanded {
       display: block;
     }
 
