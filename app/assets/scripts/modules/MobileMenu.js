@@ -7,8 +7,10 @@ class MobileMenu {
     this.menuContent = document.querySelector('.site-header__menu-content')
     this.siteHeader = document.querySelector('.site-header')
     this.rubberTitle = document.querySelector('.ultimate-trip__title')
+    this.bouncingBtn = document.querySelector('.site-header__btn-container')
     this.prevScrollPos = window.pageYOffset || document.documentElement.scrollTop;
     this.headerCollapseTimer
+    this.headerRetractTimer
     this.events()
     this.showSiteHeaderInitially()
   }
@@ -16,7 +18,7 @@ class MobileMenu {
   events() {
     this.menuIcon.addEventListener('click', () => this.toggleMenu())
     window.addEventListener('scroll', throttle(this.toggleSiteHeader, 200).bind(this))
-    window.addEventListener('scroll', debounce(() => this.hideSiteHeaderOnScrollPause(), 3000))
+    window.addEventListener('scroll', debounce(() => this.hideSiteHeaderOnScrollPause("foo"), 3000))
     window.addEventListener('scroll', debounce(this.dockSiteHeader, 100).bind(this))
   }
 
@@ -46,14 +48,41 @@ class MobileMenu {
   }
 
   toggleMenu() {
-    this.menuContent.classList.toggle('site-header__menu-content--is-expanded')
-    this.menuContent.isExpanded = (this.menuContent.isExpanded) ? false : true
-    if (!this.menuContent.isExpanded) {
-      this.headerCollapseTimer = setTimeout(this.hideSiteHeaderOnScrollPause.bind(this), 3000)
-      document.documentElement.style.overflowY = 'visible'
+
+    if(this.menuContent.isVisible) {
+
+      this.bouncingBtn.classList.remove('animate__bounceInUp')
+      this.bouncingBtn.classList.add('animate__bounceOutDown')
+      this.siteHeader.classList.add('site-header--is-retracting')
+
+      this.headerRetractTimer = setTimeout(() => {
+        this.siteHeader.classList.remove('site-header--is-expanded')
+        this.menuContent.classList.remove('site-header__menu-content--is-visible')
+        this.siteHeader.classList.remove('site-header--is-retracting')
+
+        document.documentElement.style.overflowY = 'visible'
+
+        this.menuContent.isVisible = false
+
+      }, 1400) //time for animation
+
+      this.headerCollapseTimer = setTimeout(this.hideSiteHeaderOnScrollPause.bind(this), 4400)
+
     } else {
+
+      this.bouncingBtn.classList.remove('animate__bounceOutDown')
+      this.bouncingBtn.classList.add('animate__bounceInUp')
+
+      clearTimeout(this.headerRetractTimer)
+
+      this.siteHeader.classList.add('site-header--is-expanded')
+      this.menuContent.classList.add('site-header__menu-content--is-visible')
+
       document.documentElement.style.overflowY = 'hidden'
+
+      this.menuContent.isVisible = true
     }
+
   }
 
   showSiteHeaderInitially() {
@@ -61,8 +90,9 @@ class MobileMenu {
     this.siteHeader.isVisible = true
   }
 
-  hideSiteHeaderOnScrollPause() {
-    if(this.siteHeader.isVisible && window.scrollY > 50 && !this.menuContent.isExpanded) {
+  hideSiteHeaderOnScrollPause(x) {
+    console.log(x)
+    if(this.siteHeader.isVisible && window.scrollY > 50 && !this.menuContent.isVisible) {
       this.siteHeader.classList.remove('site-header--is-visible')
       this.siteHeader.isVisible = false
     }

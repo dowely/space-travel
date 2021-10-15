@@ -5,7 +5,7 @@
   right: 0;
   transform: translateY(-100%);
   transition: all .3s linear;
-  background-color: #fff;
+  background-color: pink;
   border-bottom: 1px solid $mainSilver;
   z-index: 5;
 
@@ -15,6 +15,11 @@
 
   &--is-docked {
     border-bottom-color: transparent;
+  }
+
+  &--is-expanded {
+    bottom: 0;
+    background-image: linear-gradient(to bottom, pink, pink 100px, orange 100px, orange)
   }
 
   &__container {
@@ -112,17 +117,67 @@
   &__menu-content {
     display: none;
 
-    &--is-expanded {
-      display: block;
+    &--is-visible {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 150vh;
+      width: 150vh;
+      border-radius: 9999px;
+      animation: bloom .5s linear;
+      background-color: $mainSilver;
+
+      .site-header--is-retracting & {
+        animation: retract .5s linear .85s forwards;
+      }
     }
 
     @mixin atLarge {
       display: flex;
-      align-items: center;
+      flex-direction: row;
+      position: static;
+      transform: none;
+      height: auto;
+      width: auto;
     }
   }
 
   &__btn-container {
-    margin-left: 1rem;
+
+    &.animate__bounceInUp {
+      animation-delay: .6s;
+    }
+    
+    &.animate__bounceOutDown {
+      animation-delay: .1s;
+    }
+    
+    @mixin atLarge {
+      margin-left: 1rem;
+    }
+  }
+}
+
+@keyframes bloom {
+  from {
+    transform: translate(-50%, -50%) scale(0);
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes retract {
+  from {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    transform: translate(-50%, -50%) scale(0);
   }
 }
