@@ -170,7 +170,7 @@
     }
 
     @mixin atMedium {
-      max-width: 55%;
+      max-width: 50%;
       margin: 0;
     }
   }
