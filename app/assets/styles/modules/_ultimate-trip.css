@@ -1,6 +1,7 @@
 .ultimate-trip {
 
   text-align: center;
+  margin-top: 100px;
 
   @mixin atMedium {
     display: flex;
@@ -8,6 +9,10 @@
     align-items: center;
     text-align: left;
     align-items: flex-end;
+  }
+
+  @mixin atLarge {
+    margin-top: 0;
   }
 
   &__circle {
@@ -169,7 +174,7 @@
     }
 
     @mixin atMedium {
-      max-width: 55%;
+      max-width: 50%;
       margin: 0;
     }
   }

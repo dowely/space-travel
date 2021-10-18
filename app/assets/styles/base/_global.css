@@ -72,3 +72,11 @@ img {
   clear: both;
   display: table;
 }
+
+.noScroll {
+  overflow-y: hidden;
+
+  @mixin atLarge {
+    overflow-y: visible;
+  }
+}
