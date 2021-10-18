@@ -9,6 +9,11 @@
   border-bottom: 1px solid $mainSilver;
   z-index: 5;
 
+  @mixin atLarge {
+    position: static;
+    transform: none;
+  }
+
   &--is-visible {
     transform: translateY(0);
   }
@@ -19,7 +24,11 @@
 
   &--is-expanded {
     bottom: 0;
-    background-image: linear-gradient(to bottom, pink, pink 100px, orange 100px, orange)
+    background-image: linear-gradient(to bottom, pink, pink 100px, orange 100px, orange);
+
+    @mixin atLarge {
+      bottom: auto;
+    }
   }
 
   &__container {
@@ -92,6 +101,8 @@
       top: 0;
       left: 0;
       background-color: $darkBlue;
+      transform-origin: 0 0;
+      transition: transform .3s ease-out;
     }
 
     &__middle {
@@ -101,6 +112,7 @@
       top: 12px;
       left: 0;
       background-color: $darkBlue;
+      transition: all .3s ease-out .3s;
     }
 
     &::after {
@@ -111,6 +123,26 @@
       bottom: 0;
       left: 0;
       background-color: $darkBlue;
+      transform-origin: 0 100%;
+      transition: transform .3s ease-out;
+    }
+  }
+
+  &__menu-icon--close-x {
+    &::before {
+      transform: translate(26px, 3px) rotate(135deg) scaleX(1.25);
+      transition: transform .3s ease-out .3s;
+    }
+
+    .site-header__menu-icon__middle {
+      transform: translateX(-30px);
+      opacity: 0;
+      transition: all .3s ease-out;
+    }
+
+    &::after {
+      transform: translate(26px, -3px) rotate(-135deg) scaleX(1.25);
+      transition: transform .3s ease-out .3s;
     }
   }
 
@@ -127,8 +159,8 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      height: 150vh;
-      width: 150vh;
+      height: 170vh;
+      width: 170vh;
       border-radius: 9999px;
       animation: bloom .5s linear;
       background-color: $mainSilver;
@@ -140,11 +172,14 @@
 
     @mixin atLarge {
       display: flex;
+      align-items: center;
       flex-direction: row;
       position: static;
       transform: none;
       height: auto;
       width: auto;
+      border-radius: 0;
+      background-color: transparent;
     }
   }
 
@@ -155,11 +190,13 @@
     }
     
     &.animate__bounceOutDown {
-      animation-delay: .1s;
+      animation-delay: .2s;
     }
+
+    margin: 4rem 0 2rem;
     
     @mixin atLarge {
-      margin-left: 1rem;
+      margin: 0 0 0 1rem;
     }
   }
 }

@@ -22,8 +22,8 @@
 
   &--header {
 
-    width: 10rem;
-    height: 2.875rem;
+    width: 12.5rem;
+    height: 3.375rem;;
     padding: 0;
     display: flex;
     justify-content: center;
@@ -50,18 +50,27 @@
       }
     }
 
+    @mixin atLarge {
+      width: 10rem;
+      height: 2.875rem;
+    }
+
     @mixin atXLarge {
       width: 12.5rem;
       height: 3.375rem;
     }
 
     span {
-      font-size: 1.25rem;
+      font-size: 1.5rem;
       font-weight: 400;
       display: inline-block;
       margin-right: .75rem;
       color: $lightBlue;
       transition: color .3s ease-out;
+
+      @mixin atLarge {
+        font-size: 1.25rem;
+      }
 
       @mixin atXLarge {
         font-size: 1.5rem;

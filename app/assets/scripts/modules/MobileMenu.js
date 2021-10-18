@@ -25,7 +25,7 @@ class MobileMenu {
   toggleSiteHeader() {
     let currentScrollPos = window.pageYOffset || document.documentElement.scrollTop;
 
-    if(currentScrollPos > this.prevScrollPos && this.siteHeader.isVisible && currentScrollPos > 50) {
+    if(currentScrollPos > this.prevScrollPos && this.siteHeader.isVisible && currentScrollPos > 50 && !this.menuContent.isVisible) {
       setTimeout(() => {
         this.siteHeader.classList.remove('site-header--is-visible')
         this.siteHeader.isVisible = false
@@ -54,13 +54,15 @@ class MobileMenu {
       this.bouncingBtn.classList.remove('animate__bounceInUp')
       this.bouncingBtn.classList.add('animate__bounceOutDown')
       this.siteHeader.classList.add('site-header--is-retracting')
+      this.menuIcon.classList.remove('site-header__menu-icon--close-x')
 
       this.headerRetractTimer = setTimeout(() => {
         this.siteHeader.classList.remove('site-header--is-expanded')
         this.menuContent.classList.remove('site-header__menu-content--is-visible')
+        this.bouncingBtn.classList.remove('animate__bounceOutDown')
         this.siteHeader.classList.remove('site-header--is-retracting')
 
-        document.documentElement.style.overflowY = 'visible'
+        document.documentElement.classList.remove('noScroll')
 
         this.menuContent.isVisible = false
 
@@ -77,8 +79,9 @@ class MobileMenu {
 
       this.siteHeader.classList.add('site-header--is-expanded')
       this.menuContent.classList.add('site-header__menu-content--is-visible')
+      this.menuIcon.classList.add('site-header__menu-icon--close-x')
 
-      document.documentElement.style.overflowY = 'hidden'
+      document.documentElement.classList.add('noScroll')
 
       this.menuContent.isVisible = true
     }

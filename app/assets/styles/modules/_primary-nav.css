@@ -30,10 +30,15 @@
 
   a {
     text-decoration: none;
-    font-size: 1.25rem;
-    color: $mainGray;
+    font-size: 2rem;
+    color: $darkBlue;
     user-select: none;
     display: block;
+
+    @mixin atLarge {
+      font-size: 1.25rem;
+      color: $mainGray;
+    }
 
     @mixin atXLarge {
       font-size: 1.5rem;
@@ -52,9 +57,11 @@
     transition: transform .2s ease-out;
   }
 
-  & li:hover &__underline {
-    transition: transform .4s ease-out;
-    transform: scaleX(1);
+  @media(hover: hover) and (pointer: fine) {
+    & li:hover &__underline {
+      transition: transform .4s ease-out;
+      transform: scaleX(1);
+    }
   }
 }
 
