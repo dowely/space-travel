@@ -8,6 +8,7 @@ class MobileMenu {
     this.siteHeader = document.querySelector('.site-header')
     this.rubberTitle = document.querySelector('.ultimate-trip__title')
     this.bouncingBtn = document.querySelector('.site-header__btn-container')
+    this.links = document.querySelectorAll('.primary-nav a')
     this.prevScrollPos = window.pageYOffset || document.documentElement.scrollTop;
     this.headerCollapseTimer
     this.headerRetractTimer
@@ -20,6 +21,7 @@ class MobileMenu {
     window.addEventListener('scroll', throttle(this.toggleSiteHeader, 200).bind(this))
     window.addEventListener('scroll', debounce(() => this.hideSiteHeaderOnScrollPause("foo"), 3000))
     window.addEventListener('scroll', debounce(this.dockSiteHeader, 100).bind(this))
+    this.links.forEach(link => link.addEventListener('click', () => this.toggleMenu()))
   }
 
   toggleSiteHeader() {
@@ -70,7 +72,7 @@ class MobileMenu {
 
       this.headerCollapseTimer = setTimeout(this.hideSiteHeaderOnScrollPause.bind(this), 4400)
 
-    } else {
+    } else if (this.siteHeader.isVisible) {
 
       this.bouncingBtn.classList.remove('animate__bounceOutDown')
       this.bouncingBtn.classList.add('animate__bounceInUp')

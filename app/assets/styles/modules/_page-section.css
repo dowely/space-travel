@@ -1,6 +1,7 @@
 .page-section {
   position: relative;
   padding: 70px 0;
+  scroll-margin-top: 100px;
 
   @mixin atMedium {
     padding: 85px 0;

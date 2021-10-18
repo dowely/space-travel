@@ -5,12 +5,11 @@
   right: 0;
   transform: translateY(-100%);
   transition: all .3s linear;
-  background-color: pink;
+  background-image: linear-gradient(to bottom, #fff, #fff 100px, transparent 100px, transparent);
   border-bottom: 1px solid $mainSilver;
   z-index: 5;
 
   @mixin atLarge {
-    position: static;
     transform: none;
   }
 
@@ -24,7 +23,6 @@
 
   &--is-expanded {
     bottom: 0;
-    background-image: linear-gradient(to bottom, pink, pink 100px, orange 100px, orange);
 
     @mixin atLarge {
       bottom: auto;
