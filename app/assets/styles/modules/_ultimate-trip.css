@@ -11,10 +11,6 @@
     align-items: flex-end;
   }
 
-  @mixin atLarge {
-    margin-top: 0;
-  }
-
   &__circle {
     height: 70px;
     width: 70px;

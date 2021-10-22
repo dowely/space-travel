@@ -55,6 +55,11 @@
     transform-origin: 0 50%;
     transform: scaleX(0);
     transition: transform .2s ease-out;
+
+    a.is-active-link & {
+      transition: transform .4s ease-out;
+      transform: scaleX(1);
+    }
   }
 
   @media(hover: hover) and (pointer: fine) {
