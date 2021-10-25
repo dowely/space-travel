@@ -2,6 +2,7 @@ import '../styles/styles.css'
 import myTemplate from './templates/testimonials.hbs'
 import MobileMenu from './modules/MobileMenu'
 import LinkedNavigation from './modules/LinkedNavigation'
+import CountingNumbers from './modules/CountingNumbers'
 
 function importSprites(r) {
   r.keys().forEach(r)
@@ -29,3 +30,4 @@ function createTestimonialsHTML(testimonials) {
 
 let mobileMenu = new MobileMenu()
 let linkedNavigation = new LinkedNavigation()
+let countingNumbers = new CountingNumbers()
