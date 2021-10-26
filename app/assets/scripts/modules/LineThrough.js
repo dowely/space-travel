@@ -1,16 +1,90 @@
+import debounce from 'lodash/debounce'
+import throttle from 'lodash/throttle'
+
+let linesConfig = {
+  shift: 6,
+  speeds: [80, 40, 120], // px per sec
+  height: 8, // px
+  color: '#e54f6d'
+}
+
 class LineThrough {
   constructor() {
-    this.slogan = document.querySelector('.line-through__slogan')
-    this.container = document.querySelector('.line-through')
 
-    this.model = this.setModel()
-    this.coordinates = this.setCoordinates(this.slogan)
+    this.slogan = document.querySelector('.line-through__slogan')
+    this.section = document.querySelector('.line-through')
+
+    this.browserHeight = innerHeight
     
-    console.log(this.coordinates)
+    this.isRunning = false
+    
+    this.events()
+  }
+
+  update() {
+
+    this.container = this.setContainer()
+    this.model = this.setModel()
+    this.distance = this.setDistance(this.slogan)
+    this.coordinates = this.setCoordinates()
+    this.lines = this.populateLines()
+
+    this.populateDOM()
+
+    this.lines.forEach(lineObj => {
+      
+      let delay = Math.floor(Math.random() * 10) * 333
+
+      setTimeout(() => lineObj.go(), delay)
+
+    })
+  }
+
+  events() {
+
+    addEventListener('resize', debounce(() => {
+      this.clearDOM()
+      this.isRunning = false
+    }, 300, {leading: true, trailing: false}))
+
+    addEventListener('resize', debounce(() => {
+      this.browserHeight = innerHeight
+      this.update()
+      this.isRunning = true
+    }, 400))
+
+    addEventListener('scroll', throttle(() => {
+
+      let distance = this.section.getBoundingClientRect().top
+
+      if(distance < this.browserHeight && !this.isRunning) {
+
+        this.update()
+        this.isRunning = true
+
+      } else if(distance > this.browserHeight && this.isRunning) {
+
+        this.clearDOM()
+        this.isRunning = false
+
+      }
+    }, 200))
+  }
+
+  setContainer() {
+
+    let space = document.querySelector('.line-through')
+
+    let container = (space.offsetWidth > 1260) ?
+    document.querySelector('.line-through__container') :
+    space
+
+    return container
+      
   }
 
   setModel() {
-    //set number of lines and write Y coordinates for each line
+    //set number of lines, their height and spacing
 
     let styles = getComputedStyle(this.slogan)
 
@@ -50,7 +124,7 @@ class LineThrough {
 
   }
 
-  setCoordinates(origin, offset) {
+  setDistance(origin, offset) {
 
     let distance = (typeof offset == 'undefined') ? 0 : offset
 
@@ -70,11 +144,159 @@ class LineThrough {
 
     } else {
 
-      return this.setCoordinates(origin.offsetParent, distance)
+      return this.setDistance(origin.offsetParent, distance)
       
     }
   }
 
+  setCoordinates() {
+
+    let coordinates = []
+
+    for(let i = 0 ; i < this.model.num_of_lines ; i++) {
+
+      let innerCoordinate = 
+        this.model.top_border +
+        this.model.top_padding +
+        this.model.line_height / 2 +
+        this.model.line_height * i
+
+        coordinates.push(innerCoordinate)
+    }
+
+    coordinates.forEach((el, index, arr) => {
+      el += this.distance
+      el = Math.round(el)
+      arr[index] = el
+    })
+
+    return coordinates
+  }
+
+  populateLines() {
+
+    let lines = []
+
+    this.coordinates.forEach((elY, index, arr) => {
+
+      let speed = linesConfig.speeds[index] || 10
+
+      let shift
+
+      if(/Mobi|Android/i.test(navigator.userAgent)) {
+
+        shift = 13
+
+      } else if(this.container === document.querySelector('.line-through__container')) {
+
+        shift = 8
+
+      } else {
+
+        shift = linesConfig.shift
+      }
+
+
+      lines.push(new Line(
+        elY,
+        shift,
+        speed,
+        linesConfig.height,
+        linesConfig.color,
+        this.container.offsetWidth
+      ))
+
+    })
+
+    return lines
+  }
+
+  populateDOM() {
+    
+    this.lines.forEach(line => {
+      this.container.appendChild(line.lineDiv)
+    })
+  }
+
+  clearDOM() {
+
+    let lineDivs = document.querySelectorAll('.line-through__line')
+
+    lineDivs.forEach(div => {
+      div.remove()
+    })
+  }
+
+}
+
+class Line {
+  constructor(Y, shift, speed, height, color, maxWidth) {
+
+    this.speed = speed
+    this.height = height
+    this.maxWidth = maxWidth
+
+    this.lineDiv = document.createElement('div')
+
+    this.lineDiv.className = 'line-through__line'
+
+    this.styles = `
+      position: absolute;
+      left: -${height / 2}px;
+      top: ${Y + shift}px;
+      width: 0;
+      height: ${height}px;
+      background-color: ${color};
+      border-radius: 9999px;
+    `
+    this.lineDiv.style.cssText = this.styles
+
+    this.prevWidth = 0
+    this.frameTime = 25 // ms
+    this.increment = Math.round(speed / (1000 / this.frameTime))
+    this.expanding = true
+
+  }
+
+  go() {
+
+    setInterval(() => {
+
+      let newWidth
+
+      if(this.expanding) {
+
+        newWidth = this.prevWidth + this.increment
+
+        if(newWidth > this.maxWidth) {
+
+          this.lineDiv.style.left = 'auto'
+          this.lineDiv.style.right = `-${this.height / 2}px`
+          this.expanding = false
+
+        }
+        
+      } else {
+        
+        newWidth = this.prevWidth - this.increment
+
+        if(newWidth <= 0) {
+
+          this.lineDiv.style.right = 'auto'
+          this.lineDiv.style.left = `-${this.height / 2}px`
+          this.expanding = true
+
+        }
+      
+      }
+
+      this.lineDiv.style.width = `${newWidth}px`
+
+      this.prevWidth = newWidth
+
+    }, this.frameTime)
+
+  }
 }
 
 export default LineThrough

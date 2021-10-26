@@ -33,3 +33,5 @@ let mobileMenu = new MobileMenu()
 let linkedNavigation = new LinkedNavigation()
 let countingNumbers = new CountingNumbers()
 let lineThrough = new LineThrough()
+
+window.lineThrough = lineThrough

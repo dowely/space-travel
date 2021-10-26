@@ -95,6 +95,9 @@ class MobileMenu {
   showSiteHeaderInitially() {
     this.siteHeader.classList.add('site-header--is-visible')
     this.siteHeader.isVisible = true
+
+    this.siteHeader.classList.add('site-header--is-docked')
+    this.siteHeader.isDocked = true
   }
 
   hideSiteHeaderOnScrollPause() {

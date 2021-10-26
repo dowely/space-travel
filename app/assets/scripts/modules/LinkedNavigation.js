@@ -73,7 +73,6 @@ class LinkedNavigation {
 
   updateViewportHeight() {
     this.viewportHeight = window.innerHeight
-    console.log('Viewport height updated, now:', this.viewportHeight)
   }
 
   offSections(direction) {
