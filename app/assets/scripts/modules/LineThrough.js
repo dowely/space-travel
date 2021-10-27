@@ -15,6 +15,7 @@ class LineThrough {
     this.section = document.querySelector('.line-through')
 
     this.browserHeight = innerHeight
+    this.browserWidth = innerWidth
     
     this.isRunning = false
     
@@ -30,6 +31,7 @@ class LineThrough {
     this.lines = this.populateLines()
 
     this.populateDOM()
+    this.overlay = new Overlay()
 
     this.lines.forEach(lineObj => {
       
@@ -43,21 +45,40 @@ class LineThrough {
   events() {
 
     addEventListener('resize', debounce(() => {
-      this.clearDOM()
-      this.isRunning = false
+
+      if(innerWidth != this.browserWidth) {
+
+        this.clearDOM()
+        this.isRunning = false
+        this.isResizing = true
+
+      }
+
     }, 300, {leading: true, trailing: false}))
 
     addEventListener('resize', debounce(() => {
-      this.browserHeight = innerHeight
-      this.update()
-      this.isRunning = true
-    }, 400))
 
-    addEventListener('scroll', throttle(() => {
+      this.isResizing = false
+
+      this.browserHeight = innerHeight
+      this.browserWidth = innerWidth
 
       let distance = this.section.getBoundingClientRect().top
 
-      if(distance < this.browserHeight && !this.isRunning) {
+      if(!this.isRunning && distance < this.browserHeight) {
+
+        this.update()
+        this.isRunning = true
+
+      }
+
+    }, 400))
+
+    addEventListener('scroll', throttle(() => {
+    
+      let distance = this.section.getBoundingClientRect().top
+
+      if(distance < this.browserHeight && !this.isRunning && !this.isResizing) {
 
         this.update()
         this.isRunning = true
@@ -74,10 +95,10 @@ class LineThrough {
   setContainer() {
 
     let space = document.querySelector('.line-through')
+    let innerSpace = document.querySelector('.line-through__container')
 
-    let container = (space.offsetWidth > 1260) ?
-    document.querySelector('.line-through__container') :
-    space
+    let container =
+      (space.offsetWidth > 1200 && innerSpace.offsetWidth == 1040) ? innerSpace : space
 
     return container
       
@@ -225,6 +246,8 @@ class LineThrough {
     lineDivs.forEach(div => {
       div.remove()
     })
+
+    this.overlay.startFresh()
   }
 
 }
@@ -296,6 +319,77 @@ class Line {
 
     }, this.frameTime)
 
+  }
+}
+
+class Overlay {
+  constructor() {
+    
+    this.origin = document.querySelector('.line-through__slogan')
+    this.parent = document.querySelector('.line-through__container')
+
+    this.startFresh()
+
+    this.cloneElement()
+  }
+
+  startFresh() {
+    if(document.querySelector('#slogan_copy')) {
+      document.querySelector('#slogan_copy').remove()
+    }
+  }
+
+  cloneElement() {
+
+    let elType = this.origin.tagName
+    let elClass = this.origin.className
+
+    let padding = getComputedStyle(this.parent).getPropertyValue('padding-top')
+
+    let styles = `
+      position: absolute;
+      top: ${(padding == '60px') ? 60 : 16}px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      text-align: center;
+      margin: -16px auto;
+      z-index: 4;
+      color: #fff;
+    `
+    let wrappedText = this.wrapInStyledSpans()
+
+    let copy = document.createElement(elType)
+
+    copy.id = 'slogan_copy'
+    copy.className = elClass
+    copy.innerHTML = wrappedText
+    copy.style.cssText = styles
+    
+    this.parent.appendChild(copy)
+
+  }
+
+  wrapInStyledSpans() {
+    
+    let str = this.origin.textContent
+    let html = ''
+    let temp = document.createElement('P')
+
+    str.split('').forEach(char => {
+
+      let span = document.createElement('SPAN')
+
+      span.textContent = char
+
+      span.style.opacity = (Math.random() > .5) ? 1 : 0
+
+      temp.appendChild(span)
+    })
+
+    html = temp.innerHTML
+
+    return html
   }
 }
 
