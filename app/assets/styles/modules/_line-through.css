@@ -1,5 +1,6 @@
 .line-through {
   background: linear-gradient($darkBlue, $lightBlue);
+  
 
   @mixin atXLarge {
     background: linear-gradient(#fff, #fff 50%, $mainSilver 50%, $mainSilver);
@@ -17,6 +18,7 @@
       padding: 60px 0;
       background: linear-gradient($darkBlue, $lightBlue);
       border-radius: 28px;
+      overflow-x: hidden;
     }
   }
 

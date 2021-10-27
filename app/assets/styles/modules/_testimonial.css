@@ -30,6 +30,7 @@
       .testimonial.active & {
         outline: 1px solid $mainRed;
         outline-offset: 2px;
+        -moz-outline-radius: 50%;
       }
     }
 
