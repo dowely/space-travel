@@ -4,6 +4,7 @@ import MobileMenu from './modules/MobileMenu'
 import LinkedNavigation from './modules/LinkedNavigation'
 import CountingNumbers from './modules/CountingNumbers'
 import LineThrough from './modules/LineThrough'
+import ee from 'event-emitter'
 
 function importSprites(r) {
   r.keys().forEach(r)
@@ -34,4 +35,29 @@ let linkedNavigation = new LinkedNavigation()
 let countingNumbers = new CountingNumbers()
 let lineThrough = new LineThrough()
 
-window.lineThrough = lineThrough
+let galaxyModal
+
+const modalButtons = document.querySelectorAll('.btn')
+
+modalButtons.forEach(btn => btn.addEventListener('click', e => {
+  
+  e.preventDefault()
+
+  if(typeof galaxyModal === 'undefined') {
+
+    (async () => {
+
+      const {default: GalaxyModal} = await import('./modules/GalaxyModal')
+
+      ee(GalaxyModal.prototype)
+
+      galaxyModal = new GalaxyModal()
+
+      galaxyModal.once('htmlReady', galaxyModal.openModal)
+
+    })()
+
+  } else if(galaxyModal.isReady) {
+    galaxyModal.openModal()
+  }
+}))
