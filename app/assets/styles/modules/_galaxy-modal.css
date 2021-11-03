@@ -42,6 +42,7 @@
     line-height: 36px;
     transform-origin: 100% 0;
     transform: scaleX(1.2);
+    cursor: pointer;
   }
 
   &__display {
@@ -51,6 +52,18 @@
     left: 24px;
     right: 24px;
     background-color: papayawhip;
+  }
+
+  &__img-container {
+    width: 100%;
+    height: 50%;
+    
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 
   &__nav-bullets {
