@@ -1,4 +1,5 @@
 import imgTemplate from '../templates/galaxies.hbs'
+import GalaxySlideshow from './GalaxySlideshow'
 
 class GalaxyModal {
   constructor() {
@@ -17,6 +18,7 @@ class GalaxyModal {
   }
 
   async fetchHTML() {
+
     let response = await fetch('/assets/data/GalaxyModal.html')
     if(!response.ok) throw new Error('Could not read the resource html')
     let data = await response.text()
@@ -24,10 +26,12 @@ class GalaxyModal {
   }
 
   injectHTML(data) {
+
     this.modalHook.insertAdjacentHTML('afterbegin', data)
   }
 
   init() {
+
     this.modal = document.querySelector('.galaxy-modal')
     this.close = document.querySelector('.galaxy-modal__close')
     this.display = document.querySelector('.galaxy-modal__display')
@@ -90,6 +94,7 @@ class GalaxyModal {
   }
 
   fetchImgs(pictureItemsArray) {
+
     return new Promise((resolve, reject) => {
 
       let downloads = []
@@ -128,15 +133,71 @@ class GalaxyModal {
       hook.insertAdjacentElement('afterbegin', arr[index].imgTag)
     })
 
-    console.log(this.display)
+    this.slider = new GalaxySlideshow(this.imgHooks)
+
+  }
+
+  replaceImages(arr) {
+
+    this.imgHooks.forEach((hook, index) => {
+
+      let imgElement = hook.querySelector('img')
+      imgElement.replaceWith(arr[index].imgTag)
+
+      let title = hook.querySelector('.galaxy-modal__title')
+      title.textContent = `Title: ${arr[index].title}`
+
+      let date = hook.querySelector('.galaxy-modal__date')
+      date.textContent = `Date: ${arr[index].date}`
+
+      let author = 0 // 1st field source times one, 2nd field destination times two, checksum
+
+      if(arr[index].copy) author += 1
+      if(hook.querySelector('.galaxy-modal__author')) author +=2
+
+      switch (author) {
+
+        case 1:
+          let p = document.createElement('P')
+          p.classList.add('galaxy-modal__author')
+          p.textContent = `Author: ${arr[index].copy}`
+          hook.querySelector('.galaxy-modal__tag').appendChild(p)
+          break
+
+        case 2:
+          hook.querySelector('.galaxy-modal__author').remove()
+          break
+
+        case 3:
+          hook.querySelector('.galaxy-modal__author').
+          textContent = `Author: ${arr[index].copy}`
+          break
+        
+        default:
+          console.log('Author field not applicable')
+      }
+    })
   }
 
   openModal() {
+
     this.modal.classList.add('galaxy-modal--is-visible')
     document.documentElement.classList.add('noScroll')
+
+    if(this.hasBeenOpened) {
+
+      this.slider.hideImages()
+
+      this.downloadImgs()
+        .then(picItems => this.replaceImages(picItems))
+        .then(() => this.slider.start())
+    }
+
+    this.hasBeenOpened = true
   }
 
   closeModal() {
+
     this.modal.classList.remove('galaxy-modal--is-visible')
     
     if(!this.siteHeader.classList.contains('site-header--is-expanded')) {
