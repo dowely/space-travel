@@ -1,4 +1,5 @@
 import imgTemplate from '../templates/galaxies.hbs'
+import navBullets from '../templates/galaxyBullets.hbs'
 import GalaxySlideshow from './GalaxySlideshow'
 
 class GalaxyModal {
@@ -133,8 +134,11 @@ class GalaxyModal {
       hook.insertAdjacentElement('afterbegin', arr[index].imgTag)
     })
 
-    this.slider = new GalaxySlideshow(this.imgHooks)
+    //render bullets underneeth
 
+    document.querySelector('.galaxy-modal__nav-bullets').innerHTML = navBullets(arr)
+
+    this.slider = new GalaxySlideshow(this.imgHooks)
   }
 
   replaceImages(arr) {
@@ -187,6 +191,9 @@ class GalaxyModal {
     if(this.hasBeenOpened) {
 
       this.slider.hideImages()
+      this.slider.hideNumNav()
+      this.slider.hideBulletNav()
+      this.slider.frozen = true
 
       this.downloadImgs()
         .then(picItems => this.replaceImages(picItems))
