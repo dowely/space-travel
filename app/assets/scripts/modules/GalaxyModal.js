@@ -193,6 +193,7 @@ class GalaxyModal {
       this.slider.hideImages()
       this.slider.hideNumNav()
       this.slider.hideBulletNav()
+      this.slider.revealLoader()
       this.slider.frozen = true
 
       this.downloadImgs()

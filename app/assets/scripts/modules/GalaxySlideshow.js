@@ -11,6 +11,7 @@ class GalaxySlideshow {
     this.numNav = document.querySelector('.galaxy-modal__index')
     this.position = document.querySelector('.galaxy-modal__index span:first-child')
     this.total = document.querySelector('.galaxy-modal__index span:last-child')
+    this.loader = document.querySelector('.galaxy-loader')
 
     this.startX // for mouse/touch gestures
     this.index = 0
@@ -126,12 +127,15 @@ class GalaxySlideshow {
   }
 
   hideNumNav() {
-
     this.numNav.style.opacity = 0
   }
 
   hideBulletNav() {
     this.bulletNav.style.bottom = 0
+  }
+
+  revealLoader() {
+    this.loader.style.zIndex = 1
   }
 
   start() {
@@ -145,7 +149,8 @@ class GalaxySlideshow {
 
     this.updateIndexDisplay()
     this.updateBullets()
-    this.numNav.style.opacity = 1;
+    this.numNav.style.opacity = 1
+    this.loader.style.zIndex = -1
 
     this.frozen = false
   }

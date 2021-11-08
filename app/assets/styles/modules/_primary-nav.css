@@ -19,7 +19,7 @@
     padding: 1rem;
     cursor: pointer;
 
-    @mixin atLarge {
+    @mixin atSmall {
       display: inline-block;
     }
 

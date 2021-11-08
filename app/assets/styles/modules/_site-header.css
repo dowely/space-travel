@@ -168,6 +168,11 @@
       }
     }
 
+    @mixin atSmall {
+      height: 170vw;
+      width: 170vw;
+    }
+
     @mixin atLarge {
       display: flex;
       align-items: center;
@@ -192,6 +197,10 @@
     }
 
     margin: 4rem 0 2rem;
+
+    @mixin atSmall {
+      margin: 2rem 0;
+    }
     
     @mixin atLarge {
       margin: 0 0 0 1rem;
