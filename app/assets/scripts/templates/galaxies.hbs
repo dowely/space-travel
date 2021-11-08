@@ -1,0 +1,11 @@
+{{#each this}}
+  <div class="galaxy-modal__img-container">
+    <div class="galaxy-modal__tag">
+      <p class="galaxy-modal__title">Title: {{{this.title}}}</p>
+      <p class="galaxy-modal__date">Date: {{{this.date}}}</p>
+      {{#if this.copy}}
+        <p class="galaxy-modal__author">Author: {{{this.copy}}}</p>
+      {{/if}}
+    </div>
+  </div>
+{{/each}}

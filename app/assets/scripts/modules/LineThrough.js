@@ -247,7 +247,7 @@ class LineThrough {
       div.remove()
     })
 
-    this.overlay.startFresh()
+    if(typeof this.overlay !== 'undefined') this.overlay.startFresh()
   }
 
 }

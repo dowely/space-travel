@@ -7,7 +7,7 @@
   transition: all .3s linear;
   background-image: linear-gradient(to bottom, #fff, #fff 100px, transparent 100px, transparent);
   border-bottom: 1px solid $mainSilver;
-  z-index: 5;
+  z-index: 6;
 
   @mixin atLarge {
     transform: none;
@@ -168,6 +168,11 @@
       }
     }
 
+    @mixin atSmall {
+      height: 170vw;
+      width: 170vw;
+    }
+
     @mixin atLarge {
       display: flex;
       align-items: center;
@@ -192,6 +197,10 @@
     }
 
     margin: 4rem 0 2rem;
+
+    @mixin atSmall {
+      margin: 2rem 0;
+    }
     
     @mixin atLarge {
       margin: 0 0 0 1rem;
