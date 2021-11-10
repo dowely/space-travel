@@ -17,6 +17,8 @@ class TestimonialSlider {
     this.isAnimating = false
     this.swiped = false // set to true between swipe event and new single touchstart
 
+    this.prevBrowserWidth = innerWidth
+
     this.modelEvents()
     this.touchEvents()
   }
@@ -27,11 +29,13 @@ class TestimonialSlider {
       
       this.setModel()
 
+      this.prevBrowserWidth = innerWidth
+
     }, 200))
 
     addEventListener('resize', debounce(() => {
 
-      this.resetModel()
+      if(innerWidth !== this.prevBrowserWidth) this.resetModel()
 
     }, 199, {leading: true, trailing: false}))
   }
@@ -55,7 +59,7 @@ class TestimonialSlider {
   }
 
   resetModel() {
-
+    alert('model reset')
     if(this.readLayout() === 'block') {
 
       this.revertStyles() //revert the styling to its static state
@@ -69,23 +73,11 @@ class TestimonialSlider {
 
     this.ul.style.height = `${ulHeight}px`
 
-    /*let liStylesText = `
-      position: absolute;
-      top: 0;
-      left: 0;
-    `
-    
-
-    this.testimonials.forEach(li => {
-      li.style.cssText = liStylesText
-    })
-    */
-
     console.log('ul element is now fixed height of: ', ulHeight)
   }
 
   revertStyles() {
-
+    
     this.ul.style = undefined
 
     this.testimonials.forEach(li => {
@@ -110,7 +102,7 @@ class TestimonialSlider {
 
         if(this.swiped) return
 
-        else if(xMove - xDown > 50) {
+        else if(xMove - xDown > 100) {
 
           this.swiped = true
 
@@ -119,7 +111,7 @@ class TestimonialSlider {
 
           this.ul.dispatchEvent(ev)
 
-        } else if (xMove - xDown < -50) {
+        } else if (xMove - xDown < -100) {
 
           this.swiped = true
           
@@ -160,8 +152,8 @@ class TestimonialSlider {
 
     if(!this.isAnimating) {
 
-      if(swipe.direction === 'right') this.next()
-      if(swipe.direction === 'left') this.prev()
+      if(swipe.direction === 'right') this.next('right')
+      if(swipe.direction === 'left') this.next('left')
     }
 
   }
@@ -170,41 +162,149 @@ class TestimonialSlider {
     console.log('you clicked')
   }
 
-  async next() {
-    console.log('animating next')
+  async next(direction) {
+    console.log('animating ', direction)
+
     this.isAnimating = true
+    let nextIndex
 
-    let nextLi = this.testimonials[this.index + 1]
-    let nextLiIntro = nextLi.children[0]
-    let nextLiStory = nextLi.children[1]
+    let currentLi = {
+      outter: this.testimonials[this.index],
+      intro:  this.testimonials[this.index].children[0],
+      story:  this.testimonials[this.index].children[1]
+    }
 
-    nextLi.style.cssText = `
-      display: list-item;
-      position: absolute;
-      top: 0;
+    if (direction === 'right') {
+
+      nextIndex = (this.index === this.testimonials.length - 1) ? 0 : this.index + 1
+
+      let nextLi = {
+        outter: this.testimonials[nextIndex],
+        intro:  this.testimonials[nextIndex].children[0],
+        story:  this.testimonials[nextIndex].children[1]
+      }
+
+      this.addAnimationStyles(currentLi, nextLi, direction)
+
+      await this.runAnimations(currentLi, nextLi, direction).catch(err => console.log(err))
+
+    } else if (direction === 'left') {
+
+      nextIndex = (this.index === 0) ? this.testimonials.length - 1 : this.index - 1
+
+      let nextLi = {
+        outter: this.testimonials[nextIndex],
+        intro:  this.testimonials[nextIndex].children[0],
+        story:  this.testimonials[nextIndex].children[1]
+      }
+
+      this.addAnimationStyles(currentLi, nextLi, direction)
+
+      await this.runAnimations(currentLi, nextLi, direction).catch(err => console.log(err))
+
+    }
+
+    console.log('animations ended')
+
+    this.index = nextIndex
+
+    this.updateActiveClass()
+
+    this.removeAnimationStyles()
+
+    this.isAnimating = false
+
+  }
+
+  addAnimationStyles(current, next, direction) {
+
+    current.intro.style.cssText = `
+      transition: opacity .5s ease-out;
     `
-    nextLiIntro.style.cssText = `
-      opacity: 0;
-      transition: opacity 1s ease-out;
-    `
-    nextLiStory.style.cssText = `
-      transform: translateX(-100%);
+    current.story.style.cssText = `
       transition: transform 1s ease-out;
     `
-    await new Promise((resolve, reject) => {
+    next.outter.style.cssText = `
+    display: list-item;
+    position: absolute;
+    top: 0;
+    `
+    next.intro.style.cssText = `
+    opacity: 0;
+    transition: opacity .5s ease-out .5s;
+    `
+    next.story.style.cssText = `
+    transform: translateX(${(direction === 'right') ? -110 : 110}%);
+    transition: transform 1s ease-out;
+    `
+  }
 
-     // nextLiStory
+  runAnimations(current, next, direction) {
+
+    return new Promise((resolve, reject) => {
+
+      let animatedElements = [
+        current.intro,
+        current.story,
+        next.intro,
+        next.story
+      ]
+
+      let animations = []
+
+      animatedElements.forEach((el) => {
+
+        let animation = new Promise((res, rej) => {
+
+          el.ontransitionend = () => res()
+          el.ontransitioncancel = () => {
+            //alert('bar')
+            rej('transition canceled')
+          }
+
+        })
+
+        animations.push(animation)
+      })
+
+      Promise.allSettled(animations)
+        .then(() => resolve())
+        .catch(err => reject(err))
+
+      setTimeout(() => {
+
+        current.intro.style.opacity = 0
+        current.story.style.transform = `
+          translateX(${(direction === 'right') ? 110 : -110}%)
+        `
+        next.intro.style.opacity = 1
+        next.story.style.transform = 'translateX(0)'
+
+      }, 20)
+      
     })
-
-    setTimeout(() => nextLiStory.style.transform = 'translateX(0)', 20)
-
   }
 
-  prev() {
-    console.log('you prev: ')
+  removeAnimationStyles() {
+
+    this.testimonials.forEach(li => {
+
+      li.style = undefined
+      li.children[0].style = undefined
+      li.children[1].style = undefined
+    })
   }
 
-  goTo() {
+  updateActiveClass() {
+
+    this.testimonials.forEach((li, i) => {
+
+      li.classList.remove('active')
+      if(i === this.index) li.classList.add('active')
+    })
+  }
+
+  jumpTo() {
 
   }
 
@@ -255,4 +355,4 @@ export default TestimonialSlider
 //these funcs should overlay prev or next li (based on the current index) with styles prepared for animation and then trigger the the animation
 //during the animation set slider state to isAnimating = true to prevent the imediate swipe event from triggering the handler
 //after animation set the isAnimating to false and reassign the .active class to new li and update this.index
-//the click handler calls goTo(index) func which reassigns .active class to clicked li and updates to index}
+//the click handler calls jumpTo(index) func which reassigns .active class to clicked li and updates to index}
