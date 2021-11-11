@@ -34,7 +34,7 @@ class MobileMenu {
         this.siteHeader.classList.remove('site-header--is-visible')
         this.siteHeader.isVisible = false
       }, 200)
-    } else if(currentScrollPos <= this.prevScrollPos && !this.siteHeader.isVisible) {
+    } else if(currentScrollPos <= this.prevScrollPos - 150 && !this.siteHeader.isVisible) {
       setTimeout(() => {
         this.siteHeader.classList.add('site-header--is-visible')
         this.siteHeader.isVisible = true

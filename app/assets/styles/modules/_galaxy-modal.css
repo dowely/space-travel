@@ -58,6 +58,7 @@
     transform-origin: 100% 0;
     transform: scaleX(1.2);
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
   }
 
   &__lightbox {

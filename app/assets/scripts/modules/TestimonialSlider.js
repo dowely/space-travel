@@ -9,10 +9,12 @@ class TestimonialSlider {
     this.ul = document.querySelector('.testimonials__list ul')
 
     this.swipeHandlerBound = this.swipeHandler.bind(this)
+    this.clickHandlerBound = this.clickHandler.bind(this)
 
     this.index = this.setModel()
 
     this.touchMoveHandler
+    this.mouseMoveHandler = () => {}
 
     this.isAnimating = false
     this.swiped = false // set to true between swipe event and new single touchstart
@@ -21,15 +23,19 @@ class TestimonialSlider {
 
     this.modelEvents()
     this.touchEvents()
+    this.mouseEvents()
   }
 
   modelEvents() {
 
     addEventListener('resize', debounce(() => {
       
-      this.setModel()
+      if(innerWidth !== this.prevBrowserWidth) {
 
-      this.prevBrowserWidth = innerWidth
+        this.setModel()
+
+        this.prevBrowserWidth = innerWidth
+      }
 
     }, 200))
 
@@ -52,18 +58,16 @@ class TestimonialSlider {
       
     } else {
 
-      this.registerClickHandler()
+      this.registerClickHandlers()
 
       return this.readIndex()
     }
   }
 
   resetModel() {
-    alert('model reset')
-    if(this.readLayout() === 'block') {
 
-      this.revertStyles() //revert the styling to its static state
-    }
+    this.revertStyles()
+
     this.unhookEventHandlers()
   }
 
@@ -72,8 +76,6 @@ class TestimonialSlider {
     let ulHeight = this.tallestLiHeight()
 
     this.ul.style.height = `${ulHeight}px`
-
-    console.log('ul element is now fixed height of: ', ulHeight)
   }
 
   revertStyles() {
@@ -83,8 +85,49 @@ class TestimonialSlider {
     this.testimonials.forEach(li => {
       li.style = undefined
     })
+  }
 
-    console.log('Styles are now in their original state')
+  mouseEvents() {
+
+    this.ul.addEventListener('mousedown', mDown => {
+
+      mDown.preventDefault()
+
+      this.mouseMoveHandler = function(mMove) {
+
+        let xDown = mDown.pageX
+        let xMove = mMove.pageX
+
+        if(xMove - xDown > 100) {
+
+          let ev = new Event('swipe')
+          ev.direction = 'right'
+
+          this.ul.dispatchEvent(ev)
+
+          this.mouseMoveHandler = () => {}
+
+        } else if(xMove - xDown < -100) {
+          
+          let ev = new Event('swipe')
+          ev.direction = 'left'
+          
+          this.ul.dispatchEvent(ev)
+
+          this.mouseMoveHandler = () => {}
+        }
+      }
+    })
+
+    this.ul.addEventListener('mousemove', mMove => {
+
+      this.mouseMoveHandler(mMove)
+    })
+
+    this.ul.addEventListener('mouseup', () => {
+
+      this.mouseMoveHandler = () => {}
+    })
   }
 
   touchEvents() {
@@ -102,7 +145,7 @@ class TestimonialSlider {
 
         if(this.swiped) return
 
-        else if(xMove - xDown > 100) {
+        else if(xMove - xDown > 60) {
 
           this.swiped = true
 
@@ -111,7 +154,7 @@ class TestimonialSlider {
 
           this.ul.dispatchEvent(ev)
 
-        } else if (xMove - xDown < -100) {
+        } else if (xMove - xDown < -60) {
 
           this.swiped = true
           
@@ -133,19 +176,24 @@ class TestimonialSlider {
   registerSwipeHandler() {
 
     this.ul.addEventListener('swipe', this.swipeHandlerBound)
-
-    console.log('You can now swipe away')
   }
 
-  registerClickHandler() {
-    console.log('You can now click stuff')
+  registerClickHandlers() {
+
+    this.testimonials.forEach(li => {
+
+      li.addEventListener('click', this.clickHandlerBound)
+    })
   }
 
   unhookEventHandlers() {
 
     this.ul.removeEventListener('swipe', this.swipeHandlerBound)
 
-    console.log('Event handlers are temporarly removed')
+    this.testimonials.forEach(li => {
+
+      li.removeEventListener('click', this.clickHandlerBound)
+    })
   }
 
   swipeHandler(swipe) {
@@ -155,15 +203,26 @@ class TestimonialSlider {
       if(swipe.direction === 'right') this.next('right')
       if(swipe.direction === 'left') this.next('left')
     }
-
   }
 
-  clickHandler() {
-    console.log('you clicked')
+  clickHandler(event) {
+
+    let index
+    let containingLi = event.target 
+
+    while(containingLi.tagName !== 'LI') {
+      containingLi = containingLi.parentElement
+    }
+
+    this.testimonials.forEach((li, i) => {
+
+      if(containingLi === li) index = i
+    })
+
+    this.jumpTo(index)
   }
 
   async next(direction) {
-    console.log('animating ', direction)
 
     this.isAnimating = true
     let nextIndex
@@ -204,8 +263,6 @@ class TestimonialSlider {
 
     }
 
-    console.log('animations ended')
-
     this.index = nextIndex
 
     this.updateActiveClass()
@@ -219,10 +276,10 @@ class TestimonialSlider {
   addAnimationStyles(current, next, direction) {
 
     current.intro.style.cssText = `
-      transition: opacity .5s ease-out;
+      transition: opacity .4s ease-out;
     `
     current.story.style.cssText = `
-      transition: transform 1s ease-out;
+      transition: transform .6s ease-out;
     `
     next.outter.style.cssText = `
     display: list-item;
@@ -231,11 +288,11 @@ class TestimonialSlider {
     `
     next.intro.style.cssText = `
     opacity: 0;
-    transition: opacity .5s ease-out .5s;
+    transition: opacity .4s ease-out .4s;
     `
     next.story.style.cssText = `
     transform: translateX(${(direction === 'right') ? -110 : 110}%);
-    transition: transform 1s ease-out;
+    transition: transform .6s ease-out;
     `
   }
 
@@ -257,10 +314,7 @@ class TestimonialSlider {
         let animation = new Promise((res, rej) => {
 
           el.ontransitionend = () => res()
-          el.ontransitioncancel = () => {
-            //alert('bar')
-            rej('transition canceled')
-          }
+          el.ontransitioncancel = () => rej('transition canceled')
 
         })
 
@@ -281,7 +335,7 @@ class TestimonialSlider {
         next.story.style.transform = 'translateX(0)'
 
       }, 20)
-      
+
     })
   }
 
@@ -304,8 +358,11 @@ class TestimonialSlider {
     })
   }
 
-  jumpTo() {
+  jumpTo(pos) {
 
+    this.index = pos
+
+    this.updateActiveClass()
   }
 
   tallestLiHeight() {
@@ -339,20 +396,8 @@ class TestimonialSlider {
       if(li.classList.contains('active')) activeLi = key
     })
 
-    console.log('Curent list item is: ', activeLi)
-
     return activeLi
   }
 }
 
 export default TestimonialSlider
-
-//calculate the height of the tallest lis
-//set the ul height to that value
-//set li's position to absolute -> top 0 left 0
-//register event listener for swipe or click (depending on the model) with handler
-//the swipe handler should determine the direction of the swipe and call prev or next func if the swiper ! isAnimating
-//these funcs should overlay prev or next li (based on the current index) with styles prepared for animation and then trigger the the animation
-//during the animation set slider state to isAnimating = true to prevent the imediate swipe event from triggering the handler
-//after animation set the isAnimating to false and reassign the .active class to new li and update this.index
-//the click handler calls jumpTo(index) func which reassigns .active class to clicked li and updates to index}
