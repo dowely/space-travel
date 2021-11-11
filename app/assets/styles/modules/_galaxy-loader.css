@@ -12,7 +12,7 @@
     margin-top: 10px;
     display: inline-block;
     transform-origin: center bottom;
-    animation: rotate 3s linear infinite;
+    animation: orbit 3s linear infinite;
   }
 
   &__circle {
@@ -32,7 +32,7 @@
   }
 }
 
-@keyframes rotate {
+@keyframes orbit {
   to {
     transform: rotate(360deg);
   }

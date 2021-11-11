@@ -1,5 +1,6 @@
 .testimonial {
   text-align: center;
+  user-select: none;
 
   @mixin atMedium {
     cursor: pointer;
@@ -68,15 +69,20 @@
   &__story {
     @mixin atMedium {
       max-width: 50%;
-      display: none;
+      opacity: 0;
+      visibility: hidden;
       position: absolute;
       right: 0;
       top: 50%;
       transform: translateY(-50%);
       background-color: rgba($lightBlueRgba, .1);
+      transition: all .3s ease-out;
+      cursor: default;
 
       .testimonial.active & {
-        display: block;
+        opacity: 1;
+        visibility: visible;
+        transition: all .3s ease-out .3s;
       }
     }
 
