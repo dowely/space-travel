@@ -19,6 +19,7 @@
 
   &--is-docked {
     border-bottom-color: transparent;
+    transform: translateY(0);
   }
 
   &--is-expanded {

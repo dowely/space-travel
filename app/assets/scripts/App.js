@@ -1,3 +1,5 @@
+import 'core-js/stable'
+import 'regenerator-runtime/runtime'
 import '../styles/styles.css'
 import myTemplate from './templates/testimonials.hbs'
 import MobileMenu from './modules/MobileMenu'
@@ -34,7 +36,7 @@ function loadTestimonials() {
     req.addEventListener("error", () => {
       reject(new Error('Ooops!'))
     })
-    req.open("GET", "/assets/data/testimonials.json", true)
+    req.open("GET", "assets/data/testimonials.json", true)
     req.send()
   })
 }
@@ -65,7 +67,7 @@ modalButtons.forEach(btn => btn.addEventListener('click', e => {
 
     (async () => {
 
-      const {default: GalaxyModal} = await import('./modules/GalaxyModal')
+      const {default: GalaxyModal} = await import(/* webpackChunkName: "GalaxyModal" */ './modules/GalaxyModal')
 
       ee(GalaxyModal.prototype)
 

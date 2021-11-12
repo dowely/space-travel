@@ -20,7 +20,7 @@ class GalaxyModal {
 
   async fetchHTML() {
 
-    let response = await fetch('/assets/data/GalaxyModal.html')
+    let response = await fetch('assets/data/GalaxyModal.html')
     if(!response.ok) throw new Error('Could not read the resource html')
     let data = await response.text()
     return data
