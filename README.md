@@ -2,7 +2,7 @@
 
 A static website for a fictional space travel agency, build as a front-end practice. Think about many Javascript features and elegant styling.
 
-![Quick snapshot](https://github.com/dowely/nba-react-app/blob/main/spaceTravel.png?raw=true)
+![Quick snapshot](https://github.com/dowely/space-travel/blob/main/spaceTravel.png?raw=true)
 
 ---
 
