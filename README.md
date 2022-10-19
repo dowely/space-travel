@@ -1,2 +1,9 @@
 # space-travel
-A fictional space travel website build as a front-end practice
+
+A static website for a fictional space travel agency, build as a front-end practice. Think about many Javascript features and elegant styling.
+
+![Quick snapshot](https://github.com/dowely/nba-react-app/blob/main/spaceTravel.png?raw=true)
+
+---
+
+[Visit the App](https://dowely.github.io/space-travel)
